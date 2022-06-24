@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+    <order_id>1001</order_id>
+    <datetime>2022-06-24 12:25</datetime>
+    <total>30.0</total>
+    <item>
+        <name>milkpacket</name>
+        <mrp>10.0</mrp>
+        <quantity>3</quantity>
+    </item>
+</items>

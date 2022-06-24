@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>OrderItemPojo.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">pos</a> &gt; <a href="index.source.html" class="el_package">pos.pojo</a> &gt; <span class="el_source">OrderItemPojo.java</span></div><h1>OrderItemPojo.java</h1><pre class="source lang-java linenums">package pos.pojo;
+
+import javax.persistence.*;
+@Entity
+<span class="fc" id="L5">public class OrderItemPojo {</span>
+
+    //Generate id starting from 100000
+    @Id
+    @GeneratedValue(strategy= GenerationType.SEQUENCE,generator = &quot;orderItemIdSequence&quot;)
+    @SequenceGenerator(name = &quot;orderItemIdSequence&quot;,initialValue = 100000, allocationSize = 1, sequenceName = &quot;orderItemId&quot;)
+    private Integer id;
+    private Integer quantity;
+    
+    private Double sp;
+    private Integer orderId;
+    
+    private Integer ProductId;
+
+    public Integer getId() {
+<span class="fc" id="L20">		return id;</span>
+	}
+
+	public void setId(Integer id) {
+<span class="fc" id="L24">		this.id = id;</span>
+<span class="fc" id="L25">	}</span>
+
+	public Integer getQuantity() {
+<span class="fc" id="L28">		return quantity;</span>
+	}
+
+	public void setQuantity(Integer quantity) {
+<span class="fc" id="L32">		this.quantity = quantity;</span>
+<span class="fc" id="L33">	}</span>
+
+	public Double getSp() {
+<span class="fc" id="L36">		return sp;</span>
+	}
+
+	public void setSp(Double sp) {
+<span class="fc" id="L40">		this.sp = sp;</span>
+<span class="fc" id="L41">	}</span>
+
+	public Integer getOrderId() {
+<span class="fc" id="L44">		return orderId;</span>
+	}
+
+	public void setOrderId(Integer orderId) {
+<span class="fc" id="L48">		this.orderId = orderId;</span>
+<span class="fc" id="L49">	}</span>
+
+	public Integer getProductId() {
+<span class="fc" id="L52">		return ProductId;</span>
+	}
+
+	public void setProductId(Integer productId) {
+<span class="fc" id="L56">		ProductId = productId;</span>
+<span class="fc" id="L57">	}</span>
+
+	public Double getRevenue() {
+<span class="nc" id="L60">        return quantity*sp;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

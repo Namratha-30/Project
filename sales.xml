@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<sales_items>
+    <sales_item>
+        <category>chips</category>
+        <quantity>20</quantity>
+        <revenue>1000.0</revenue>
+    </sales_item>
+    <sales_item>
+        <category>milk</category>
+        <quantity>31</quantity>
+        <revenue>185.0</revenue>
+    </sales_item>
+    <sales_item>
+        <category>chocolate</category>
+        <quantity>2</quantity>
+        <revenue>1000.0</revenue>
+    </sales_item>
+</sales_items>

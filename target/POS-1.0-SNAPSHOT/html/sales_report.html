@@ -1,0 +1,105 @@
+
+<!doctype html>
+
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head th:replace="snippets.html :: name_head"></head>
+
+ <script  src="js/jquery.js"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+    <link href="media/css/jquery.dataTables.min.js" rel="stylesheet">
+
+<body>
+
+<nav th:replace="snippets.html :: name_app_navbar"></nav>
+
+<!-- <nav th:replace="snippets.html :: name_app1_navbar"></nav> -->
+
+<div class="row" id="mainview"> <!-- mainview.row.start -->
+    
+
+<div class="container">
+
+      <h3>Sales Report</h3>
+
+    <div class="row">
+        <div class="col-12">
+            <form class="form" align-items:"margin-left" id="sales-report-form">
+                <div class="form-group row col-md-12" align="left">
+                    <div class="form-inline col-md-3" style="margin-left:-96px;">
+                        <div class="col-md-6">
+                            <label for="inputStartDate" class="col-form-label">Start Date<i class="glyphicon glyphicon-asterisk" style="color: red;"></i></label>
+                        </div>
+                            <div class="col-md-6" style="padding-left:22px;">
+                                <input type="date" class="form-control" name="startDate" id="inputStartDate" placeholder="Enter start date" required="">
+                            </div>
+                        
+                        </div>
+                        <div class="form-inline col-md-3">
+                        <div class="col-md-6">
+                            <label for="inputEndDate" class=" col-form-label">End Date<i class="glyphicon glyphicon-asterisk" style="color: red;"></i></label>
+                        </div>
+                            <div class="col-md-6" style="padding-left:25px;">
+                                <input type="date" class="form-control" name="endDate" id="inputEndDate" placeholder="Enter end date" required="">
+                            </div>
+                        
+                    </div>
+                    <div class="form-inline col-md-3">
+                        <div class="col-md-6">
+                            <label for="inputBrand" class=" col-form-label">Brand</label>
+                        </div>
+                            <div class="col-md-6" style="padding-left:38px;">
+                                <input type="text" class="form-control" name="brand" id="inputBrand" placeholder="Enter brand">
+                            </div>
+                        
+                        </div>
+                        <div class="form-inline col-md-3">
+                        <div class="col-md-6">
+                            <label for="inputCategory" class="col-form-label">Category</label>
+                        </div>
+                            <div class="col-md-6" style="padding-left:30px;">
+                                <input type="text" class="form-control" name="category" id="inputCategory" placeholder="Enter category">
+                            </div>
+                        
+                        </div>
+                    </div>
+
+            </form>
+            <div align="left" style="padding-top: 50px;">
+                <button type="button" class="btn btn-primary" id="sales-report" style="padding-top:4px; padding-bottom:4px; padding-right:15px; padding-left:15px;"> Generate Report</button>
+            </div>
+        </div>
+    </div>
+
+<!-- <h3 style="padding-top: 30px;"> Generate Other Reports</h3> -->
+<div class="row">
+<div class="col-12">
+
+<form class="form" align-items="margin-left">
+                <div class="form-row">
+                    <div class="form-group col-md-6" style="padding-top: 30px;">
+                        <h3>Brand Report</h3>
+                       <button type="button" class="btn btn-sm btn-primary" title="Download brand report" id="brand-report" style="padding-left: 20px; padding-right: 20px; margin-top:15px;" >Generate Brand Report</input>
+                    </div>
+                    </div>
+                    <div class="form-row">
+                    <div class="form-group col-md-6" style="padding-top: 30px;">
+                        <h3>Inventory Report</h3>
+						<button type="button" class="btn btn-sm btn-primary" title="Download inventory report" id="inventory-report" style="padding-left:13px; padding-right:12px; margin-top:15px;">Generate Inventory Report</input>
+                    </div>
+                </div>
+            </form>
+</div>
+</div>
+
+
+</div>
+
+ <footer th:replace="snippets.html :: name_footer"></footer> 
+<script th:src="@{/static/sales_report.js}"></script>
+ <script th:src="@{/static/app.js}"/>
+    </script>
+</body>
+
+</html>

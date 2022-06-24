@@ -1,0 +1,8 @@
+pos/service/ProductServiceTest.class
+pos/service/AbstractUnitTest.class
+pos/service/AboutAppServiceTest.class
+pos/service/BrandServiceTest.class
+pos/service/QaConfig.class
+pos/util/DataConversionUtilTest.class
+pos/service/InventoryServiceTest.class
+pos/service/OrderServiceTest.class

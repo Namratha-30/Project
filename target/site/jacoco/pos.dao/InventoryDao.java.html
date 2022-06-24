@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>InventoryDao.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">pos</a> &gt; <a href="index.source.html" class="el_package">pos.dao</a> &gt; <span class="el_source">InventoryDao.java</span></div><h1>InventoryDao.java</h1><pre class="source lang-java linenums">package pos.dao;
+
+import java.util.List;
+
+import javax.persistence.NoResultException;
+import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
+
+import org.springframework.stereotype.Repository;
+
+//import jdk.internal.org.jline.utils.Log;
+import pos.pojo.InventoryPojo;
+import pos.service.ApiException;
+
+//Repository for inventory
+@Repository
+<span class="fc" id="L17">public class InventoryDao extends AbstractDao{</span>
+
+    //Insert into table
+    @Transactional
+    public void insert(InventoryPojo inventoryPojo){
+<span class="fc" id="L22">        em().persist(inventoryPojo);</span>
+<span class="fc" id="L23">    }</span>
+
+    //Retrieve an inventory pojo with id
+    public InventoryPojo select(int id){
+<span class="fc" id="L27">        return em().find(InventoryPojo.class,id);</span>
+    }
+
+    //Retrieve list of inventory pojo
+    public List&lt;InventoryPojo&gt; selectAll() throws ApiException {
+<span class="fc" id="L32">        String select_all = &quot;select p from InventoryPojo p&quot;;</span>
+        
+        try
+        {
+<span class="fc" id="L36">        	TypedQuery&lt;InventoryPojo&gt; query = getQuery(select_all,  InventoryPojo.class);</span>
+<span class="fc" id="L37">        return query.getResultList();</span>
+        }
+<span class="nc" id="L39">        catch(NoResultException e){</span>
+//        	Log.debug(&quot;No data found&quot;);
+<span class="nc" id="L41">        	throw new ApiException(e.getMessage());</span>
+        }
+    }
+
+    //Update an inventory
+    public void update(int id,InventoryPojo inventoryPojo) {
+
+<span class="fc" id="L48">    }</span>
+
+    //get from product Id
+    //TODO rename
+    public InventoryPojo selectByProductId(int productId){
+<span class="fc" id="L53">        String select=&quot;select p from InventoryPojo p where productId=:productId&quot;;</span>
+<span class="fc" id="L54">        TypedQuery&lt;InventoryPojo&gt; query = getQuery(select, InventoryPojo.class);</span>
+<span class="fc" id="L55">        query.setParameter(&quot;productId&quot;, productId);</span>
+<span class="fc" id="L56">        List&lt;InventoryPojo&gt; res=query.getResultList();</span>
+<span class="fc bfc" id="L57" title="All 2 branches covered.">        if(res.size()&gt;0){</span>
+<span class="fc" id="L58">            return res.get(0);</span>
+        }
+        else
+<span class="fc" id="L61">            return null;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

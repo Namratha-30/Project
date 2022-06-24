@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>OrderController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">pos</a> &gt; <a href="index.source.html" class="el_package">pos.controller</a> &gt; <span class="el_source">OrderController.java</span></div><h1>OrderController.java</h1><pre class="source lang-java linenums">package pos.controller;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import pos.model.data.OrderItemData;
+import pos.model.form.OrderItemForm;
+import pos.model.xml.OrderData;
+import pos.pojo.InventoryPojo;
+import pos.pojo.OrderItemPojo;
+import pos.pojo.OrderPojo;
+import pos.pojo.ProductPojo;
+import pos.service.ApiException;
+import pos.service.InventoryService;
+import pos.service.OrderService;
+import pos.service.ProductService;
+import pos.util.DataConversionUtil;
+
+//Controls the order page of the application
+@Api
+@RestController
+<span class="fc" id="L33">public class OrderController extends ExceptionHandler{</span>
+
+    @Autowired
+    private OrderService orderService;
+
+    @Autowired
+    private ProductService productService;
+    
+    @Autowired
+    private InventoryService inventoryService;
+    //Adds an order
+    @ApiOperation(value = &quot;Adds Order Items&quot;)
+    @RequestMapping(path = &quot;/api/orders&quot;, method = RequestMethod.POST)
+    public void add(@RequestBody OrderItemForm[] orderItemForms) throws ApiException{
+<span class="nc" id="L47">        Map&lt;String, ProductPojo&gt; allProductPojoByBarcode = productService.getAllProductPojosByBarcode();</span>
+        
+<span class="nc" id="L49">        List&lt;OrderItemPojo&gt; orderItemList = DataConversionUtil.convertOrderItemForms(allProductPojoByBarcode, orderItemForms);</span>
+<span class="nc" id="L50">        checkQuantityExists(orderItemList);</span>
+<span class="nc" id="L51">        orderService.add(orderItemList);</span>
+<span class="nc" id="L52">    }</span>
+
+    private void checkQuantityExists(List&lt;OrderItemPojo&gt; orderItemList) throws ApiException {
+		
+<span class="nc" id="L56">		List&lt;OrderItemPojo&gt; orderforms=new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L57">		List&lt;InventoryPojo&gt; inventoryPojo=inventoryService.getAll();</span>
+<span class="nc" id="L58">		List&lt;ProductPojo&gt; productPojo=productService.getAll();</span>
+<span class="nc" id="L59">		HashMap&lt;String , Integer&gt; hMapNumbers = new HashMap&lt;String , Integer&gt;();</span>
+<span class="nc" id="L60">		int pid=0;</span>
+<span class="nc" id="L61">		String barcode=null;</span>
+<span class="nc bnc" id="L62" title="All 2 branches missed.">		for(int i=0;i&lt;orderItemList.size();i++)</span>
+		{
+<span class="nc bnc" id="L64" title="All 2 branches missed.">			for(int j=0;j&lt;inventoryPojo.size();j++)</span>
+			{
+<span class="nc bnc" id="L66" title="All 2 branches missed.">				if(orderItemList.get(i).getProductId().equals(inventoryPojo.get(j).getProductId()))</span>
+					{
+<span class="nc bnc" id="L68" title="All 2 branches missed.">						if(orderItemList.get(i).getQuantity()&gt;inventoryPojo.get(j).getQuantity())</span>
+						{
+<span class="nc" id="L70">							pid=orderItemList.get(i).getProductId();</span>
+<span class="nc bnc" id="L71" title="All 2 branches missed.">							for(ProductPojo productPojo1:productPojo)</span>
+							{
+<span class="nc bnc" id="L73" title="All 2 branches missed.">								if(productPojo1.getId()==pid)</span>
+								{
+<span class="nc" id="L75">								barcode=productPojo1.getBarcode();</span>
+								}
+<span class="nc" id="L77">							}</span>
+<span class="nc" id="L78">							hMapNumbers.put(barcode, orderItemList.get(i).getQuantity());</span>
+<span class="nc" id="L79">							orderforms.add(orderItemList.get(i));</span>
+						}
+					}
+			}
+		}
+<span class="nc bnc" id="L84" title="All 2 branches missed.">		if(!hMapNumbers.isEmpty())</span>
+		{
+<span class="nc" id="L86">			throw new ApiException(&quot;The inventory is less for the following products: &quot;+hMapNumbers);</span>
+		}
+<span class="nc" id="L88">	}</span>
+
+	//Adds an OrderItem to an existing order
+    @ApiOperation(value = &quot;Adds an OrderItem to an existing order&quot;)
+    @RequestMapping(path = &quot;/api/order/{orderId}/orderItems&quot;, method = RequestMethod.POST)
+    public void addOrderItem(@PathVariable int orderId, @RequestBody OrderItemForm orderItemForm) throws ApiException {
+<span class="nc" id="L94">        orderItemForm.setBarcode(orderItemForm.getBarcode().toLowerCase().trim());</span>
+<span class="nc" id="L95">        ProductPojo productPojo = productService.getFromBarcode(orderItemForm.getBarcode());</span>
+<span class="nc" id="L96">        OrderItemPojo orderItemPojo = DataConversionUtil.convert(productPojo, orderItemForm);</span>
+<span class="nc" id="L97">        orderService.addOrderItem(orderId, orderItemPojo);</span>
+<span class="nc" id="L98">    }</span>
+
+    //Gets a OrderItem details record by id
+    @ApiOperation(value = &quot;Gets a OrderItem details record by id&quot;)
+    @RequestMapping(path = &quot;/api/orderItems/{id}&quot;, method = RequestMethod.GET)
+    public OrderItemData get(@PathVariable int id) throws ApiException {
+<span class="nc" id="L104">        OrderItemPojo orderItemPojo = orderService.get(id);</span>
+<span class="nc" id="L105">        ProductPojo productPojo= productService.get(orderItemPojo.getProductId());</span>
+<span class="nc" id="L106">        return DataConversionUtil.convert(orderItemPojo,productPojo);</span>
+    }
+
+    //Gets list of Order Items
+    @ApiOperation(value = &quot;Gets list of Order Items&quot;)
+    @RequestMapping(path = &quot;/api/orderItems&quot;, method = RequestMethod.GET)
+    public List&lt;OrderItemData&gt; getAll() throws ApiException {
+<span class="nc" id="L113">        List&lt;OrderItemPojo&gt; orderItemPojoList = orderService.getAll();</span>
+<span class="nc" id="L114">        List&lt;OrderItemData&gt; orderItemDataList = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L115" title="All 2 branches missed.">        for (OrderItemPojo orderItemPojo : orderItemPojoList) {</span>
+<span class="nc" id="L116">            ProductPojo productPojo= productService.get(orderItemPojo.getProductId());</span>
+<span class="nc" id="L117">            orderItemDataList.add(DataConversionUtil.convert(orderItemPojo,productPojo));</span>
+<span class="nc" id="L118">        }</span>
+<span class="nc" id="L119">        return orderItemDataList;</span>
+    }
+
+    //Gets list of Orders
+    @ApiOperation(value = &quot;Gets list of Orders&quot;)
+    @RequestMapping(path = &quot;/api/orders&quot;, method = RequestMethod.GET)
+    public List&lt;OrderData&gt; getAllOrders() {
+<span class="nc" id="L126">        List&lt;OrderPojo&gt; orderPojoList = orderService.getAllOrders();</span>
+<span class="nc" id="L127">        List&lt;OrderData&gt; orderDataList = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L128" title="All 2 branches missed.">        for (OrderPojo orderPojo : orderPojoList) {</span>
+<span class="nc" id="L129">            orderDataList.add(DataConversionUtil.convert(orderPojo));</span>
+<span class="nc" id="L130">        }</span>
+<span class="nc" id="L131">        return orderDataList;</span>
+    }
+
+    //Get single order
+    @ApiOperation(value = &quot;Gets an Order&quot;)
+    @RequestMapping(path = &quot;/api/singleOrder/{id}&quot;, method = RequestMethod.GET)
+    public OrderData getSingleOrder(@PathVariable int id) throws ApiException {
+<span class="nc" id="L138">        OrderPojo orderPojo= orderService.getOrder(id);</span>
+<span class="nc" id="L139">        return DataConversionUtil.convert(orderPojo);</span>
+    }
+
+    //Gets list of Order Items of a particular order
+    @ApiOperation(value = &quot;Gets list of Order Items of a particular order&quot;)
+    @RequestMapping(path = &quot;/api/orders/{id}&quot;, method = RequestMethod.GET)
+    public List&lt;OrderItemData&gt; getOrderItemsByOrderId(@PathVariable int id) throws ApiException {
+<span class="nc" id="L146">        List&lt;OrderItemPojo&gt; orderItemPojoList = orderService.getOrderItems(id);</span>
+<span class="nc" id="L147">        List&lt;OrderItemData&gt; orderItemDataList = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L148" title="All 2 branches missed.">        for (OrderItemPojo orderItemPojo : orderItemPojoList) {</span>
+<span class="nc" id="L149">            ProductPojo productPojo= productService.get(orderItemPojo.getProductId());</span>
+<span class="nc" id="L150">            orderItemDataList.add(DataConversionUtil.convert(orderItemPojo,productPojo));</span>
+<span class="nc" id="L151">        }</span>
+<span class="nc" id="L152">        return orderItemDataList;</span>
+    }
+
+    //Updates a OrderItem record
+    @ApiOperation(value = &quot;Updates a OrderItem record&quot;)
+    @RequestMapping(path = &quot;/api/orderItems/{id}&quot;, method = RequestMethod.PUT)
+    public void update(@PathVariable int id, @RequestBody OrderItemForm orderItemForm) throws ApiException {
+<span class="nc" id="L159">        orderItemForm.setBarcode(orderItemForm.getBarcode().toLowerCase().trim());</span>
+<span class="nc" id="L160">        ProductPojo productPojo = productService.getFromBarcode(orderItemForm.getBarcode());</span>
+<span class="nc" id="L161">        OrderItemPojo orderItemPojo = DataConversionUtil.convert(productPojo, orderItemForm);</span>
+<span class="nc" id="L162">        orderService.update(id, orderItemPojo);</span>
+<span class="nc" id="L163">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>
