@@ -490,11 +490,17 @@ function createOrderItems(data,id,myList) {
 		+ '</tr>';
 		table.append(row);
 			
-		if(i.isInvoiceGenerated)
+		
+	}
+	for(var i in myList){
+		var e = myList[i];
+		
+		if(e.isInvoiceGenerated)
 		{
 			console.log($('#editOrder'+e.id+''));
 			$('#editOrder'+e.id+'').attr('disabled',true);
 		}	
+	
 	}
 	
 }

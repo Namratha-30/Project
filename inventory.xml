@@ -1,48 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <inventory_items>
     <inventory_item>
-        <brand>dairy</brand>
-        <category>chic</category>
-        <quantity>18</quantity>
+        <brand>dairymilk</brand>
+        <category>chocolate</category>
+        <quantity>21</quantity>
     </inventory_item>
     <inventory_item>
-        <brand>ars</brand>
-        <category>ga</category>
-        <quantity>22</quantity>
+        <brand>mazaa</brand>
+        <category>drinks</category>
+        <quantity>56</quantity>
     </inventory_item>
     <inventory_item>
-        <brand>1</brand>
-        <category>23</category>
-        <quantity>5</quantity>
+        <brand>bingo</brand>
+        <category>chips</category>
+        <quantity>13</quantity>
     </inventory_item>
     <inventory_item>
-        <brand>ars</brand>
-        <category>ga</category>
-        <quantity>19</quantity>
+        <brand>mazaa</brand>
+        <category>drinks</category>
+        <quantity>270</quantity>
     </inventory_item>
     <inventory_item>
-        <brand>dairy</brand>
-        <category>chic</category>
-        <quantity>20</quantity>
+        <brand>amul</brand>
+        <category>milk</category>
+        <quantity>98</quantity>
     </inventory_item>
     <inventory_item>
-        <brand>ars</brand>
-        <category>ga</category>
-        <quantity>19</quantity>
-    </inventory_item>
-    <inventory_item>
-        <brand>amul2</brand>
-        <category>milk2</category>
-        <quantity>0</quantity>
-    </inventory_item>
-    <inventory_item>
-        <brand>ars</brand>
-        <category>ga</category>
-        <quantity>9</quantity>
-    </inventory_item>
-    <inventory_item>
-        <brand>ars</brand>
-        <category>ga</category>
-        <quantity>19</quantity>
+        <brand>amul</brand>
+        <category>milk</category>
+        <quantity>1</quantity>
     </inventory_item>
 </inventory_items>
