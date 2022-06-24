@@ -488,16 +488,15 @@ function createOrderItems(data,id,myList) {
 		+ '<td>' + e.sp + '</td>'
 		+ '<td>' + buttonHtml + '</td>'
 		+ '</tr>';
-		table.append(row);		
-	}
-	for(var i in myList){
-		var e = myList[i];
-	if(e.isInvoiceGenerated)
+		table.append(row);
+			
+		if(i.isInvoiceGenerated)
 		{
 			console.log($('#editOrder'+e.id+''));
 			$('#editOrder'+e.id+'').attr('disabled',true);
-		}
+		}	
 	}
+	
 }
 
 function initializeDropdown(id) {
