@@ -1,33 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <inventory_items>
     <inventory_item>
-        <brand>dairymilk</brand>
-        <category>chocolate</category>
+        <brand>amul</brand>
+        <category>milk</category>
         <quantity>21</quantity>
     </inventory_item>
     <inventory_item>
-        <brand>mazaa</brand>
-        <category>drinks</category>
-        <quantity>56</quantity>
+        <brand>dairy</brand>
+        <category>chocolate</category>
+        <quantity>14</quantity>
     </inventory_item>
     <inventory_item>
-        <brand>bingo</brand>
-        <category>chips</category>
+        <brand>amul</brand>
+        <category>milk</category>
         <quantity>13</quantity>
-    </inventory_item>
-    <inventory_item>
-        <brand>mazaa</brand>
-        <category>drinks</category>
-        <quantity>270</quantity>
-    </inventory_item>
-    <inventory_item>
-        <brand>amul</brand>
-        <category>milk</category>
-        <quantity>98</quantity>
-    </inventory_item>
-    <inventory_item>
-        <brand>amul</brand>
-        <category>milk</category>
-        <quantity>1</quantity>
     </inventory_item>
 </inventory_items>

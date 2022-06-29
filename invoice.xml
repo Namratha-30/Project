@@ -1,26 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <items>
     <order_id>1000</order_id>
-    <datetime>2022-06-24 12:18</datetime>
-    <total>2155.0</total>
+    <datetime>2022-06-28 14:46</datetime>
+    <total>200.0</total>
     <item>
-        <name>milkpacket</name>
-        <mrp>10.0</mrp>
-        <quantity>3</quantity>
+        <name>amul milk</name>
+        <mrp>20.0</mrp>
+        <quantity>7</quantity>
     </item>
     <item>
-        <name>bingo</name>
-        <mrp>50.0</mrp>
-        <quantity>20</quantity>
+        <name>milk</name>
+        <mrp>20.0</mrp>
+        <quantity>1</quantity>
     </item>
     <item>
-        <name>milkpacket2</name>
-        <mrp>5.0</mrp>
-        <quantity>25</quantity>
-    </item>
-    <item>
-        <name>dairymilk</name>
-        <mrp>500.0</mrp>
+        <name>milk</name>
+        <mrp>20.0</mrp>
         <quantity>2</quantity>
     </item>
 </items>

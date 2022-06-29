@@ -2,7 +2,7 @@
 <sales_items>
     <sales_item>
         <category>milk</category>
-        <quantity>55</quantity>
-        <revenue>2829.0</revenue>
+        <quantity>10</quantity>
+        <revenue>200.0</revenue>
     </sales_item>
 </sales_items>

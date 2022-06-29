@@ -13,6 +13,7 @@ import pos.service.ApiException;
 import pos.service.InventoryService;
 import pos.service.ProductService;
 import pos.util.DataConversionUtil;
+import pos.util.StringUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +34,9 @@ public class InventoryController extends ExceptionHandler{
     @ApiOperation(value = "Adds a product to inventory")
     @RequestMapping(path = "", method = RequestMethod.POST)
     public void add(@RequestBody InventoryForm inventoryForm) throws ApiException {
+    	inventoryForm.setBarcode(inventoryForm.getBarcode().toLowerCase().trim());
+
+    	
         ProductPojo productPojo= productService.getFromBarcode(inventoryForm.getBarcode());
         InventoryPojo inventoryPojo= DataConversionUtil.convert(inventoryForm,productPojo);
         inventoryService.add(inventoryPojo);

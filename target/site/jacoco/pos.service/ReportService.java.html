@@ -46,7 +46,7 @@ import java.util.Map;
 <span class="nc bnc" id="L46" title="All 2 branches missed.">        else if (type.contentEquals(&quot;sales&quot;)) {</span>
 
 <span class="nc" id="L48">            SaleXmlList saleXmlList = generateSalesList((ReportFilter) obj[0]);</span>
-<span class="nc" id="L49">            System.out.println((ReportFilter) obj[0]);</span>
+           // System.out.println((ReportFilter) obj[0]);
 <span class="nc bnc" id="L50" title="All 2 branches missed.">            if(saleXmlList.getSaleReportDataList().isEmpty()) {</span>
 <span class="nc" id="L51">                throw new ApiException(&quot;No sales was done in this date range for this particular brand and category pair&quot;);</span>
             }
@@ -89,85 +89,86 @@ import java.util.Map;
     //Generate sales list for sales report
     public SaleXmlList generateSalesList(ReportFilter reportFilter) throws Exception {
 <span class="nc" id="L91">        List&lt;OrderItemPojo&gt; orderItemPojoList1 = FilterByDate(reportFilter);</span>
-<span class="nc" id="L92">        Map&lt;String, Integer&gt; quantityPerBrandCategory = getMapQuantity(reportFilter, orderItemPojoList1);</span>
-<span class="nc" id="L93">        Map&lt;String, Double&gt; revenuePerBrandCategory = getMapRevenue(reportFilter, orderItemPojoList1);</span>
+<span class="nc" id="L92">        System.out.println(orderItemPojoList1.size());</span>
+<span class="nc" id="L93">        Map&lt;String, Integer&gt; quantityPerBrandCategory = getMapQuantity(reportFilter, orderItemPojoList1);</span>
+<span class="nc" id="L94">        Map&lt;String, Double&gt; revenuePerBrandCategory = getMapRevenue(reportFilter, orderItemPojoList1);</span>
        // System.out.println(revenuePerBrandCategory);
-<span class="nc" id="L95">        return DataConversionUtil.convertSalesList(quantityPerBrandCategory, revenuePerBrandCategory);</span>
+<span class="nc" id="L96">        return DataConversionUtil.convertSalesList(quantityPerBrandCategory, revenuePerBrandCategory);</span>
     }
 
     //Getting order items based on date
     private List&lt;OrderItemPojo&gt; FilterByDate(ReportFilter reportFilter) throws ApiException {
-<span class="nc" id="L100">        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(&quot;yyyy-MM-dd&quot;);</span>
-<span class="nc" id="L101">        LocalDateTime startDate = LocalDate.parse(reportFilter.getStartDate(), formatter).atStartOfDay();</span>
-<span class="nc" id="L102">        LocalDateTime endDate = LocalDate.parse(reportFilter.getEndDate(), formatter).atStartOfDay().plusDays(1);</span>
-<span class="nc" id="L103">        return orderService.getOrderItemInDate(startDate,endDate);</span>
+<span class="nc" id="L101">        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(&quot;yyyy-MM-dd&quot;);</span>
+<span class="nc" id="L102">        LocalDateTime startDate = LocalDate.parse(reportFilter.getStartDate(), formatter).atStartOfDay();</span>
+<span class="nc" id="L103">        LocalDateTime endDate = LocalDate.parse(reportFilter.getEndDate(), formatter).atStartOfDay().plusDays(1);</span>
+<span class="nc" id="L104">        return orderService.getOrderItemInDate(startDate,endDate);</span>
     }
 
     // Gets quantity from brand
     private Map&lt;String, Integer&gt; getMapQuantity(ReportFilter reportFilter, List&lt;OrderItemPojo&gt; orderItemPojoList) throws ApiException {
-<span class="nc" id="L108">        Map&lt;String, Integer&gt; quantityPerBrandCategory = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L109">        Map&lt;String, Integer&gt; quantityPerBrandCategory = new HashMap&lt;&gt;();</span>
         
-<span class="nc bnc" id="L110" title="All 2 branches missed.">        for (OrderItemPojo orderItemPojo : orderItemPojoList) {</span>
-<span class="nc bnc" id="L111" title="All 2 branches missed.">            if (Equals(orderService.getBrandFromOrderItem(orderItemPojo).getBrand(), reportFilter.getBrand())</span>
-<span class="nc bnc" id="L112" title="All 2 branches missed.">                    &amp;&amp; Equals(orderService.getBrandFromOrderItem(orderItemPojo).getCategory(), reportFilter.getCategory())) {</span>
-<span class="nc bnc" id="L113" title="All 2 branches missed.">            	if(!quantityPerBrandCategory.containsKey(orderService.getBrandFromOrderItem(orderItemPojo).getCategory())){</span>
-<span class="nc" id="L114">					  quantityPerBrandCategory.put(orderService.getBrandFromOrderItem(orderItemPojo).getCategory(),orderItemPojo.getQuantity());</span>
+<span class="nc bnc" id="L111" title="All 2 branches missed.">        for (OrderItemPojo orderItemPojo : orderItemPojoList) {</span>
+<span class="nc bnc" id="L112" title="All 2 branches missed.">            if (Equals(orderService.getBrandFromOrderItem(orderItemPojo).getBrand(), reportFilter.getBrand())</span>
+<span class="nc bnc" id="L113" title="All 2 branches missed.">                    &amp;&amp; Equals(orderService.getBrandFromOrderItem(orderItemPojo).getCategory(), reportFilter.getCategory())) {</span>
+<span class="nc bnc" id="L114" title="All 2 branches missed.">            	if(!quantityPerBrandCategory.containsKey(orderService.getBrandFromOrderItem(orderItemPojo).getCategory())){</span>
+<span class="nc" id="L115">					  quantityPerBrandCategory.put(orderService.getBrandFromOrderItem(orderItemPojo).getCategory(),orderItemPojo.getQuantity());</span>
 				  }else {
-<span class="nc" id="L116">				  quantityPerBrandCategory.put(orderService.getBrandFromOrderItem(orderItemPojo).getCategory(),quantityPerBrandCategory.get(orderService.getBrandFromOrderItem(orderItemPojo).getCategory())+orderItemPojo.getQuantity());</span>
+<span class="nc" id="L117">				  quantityPerBrandCategory.put(orderService.getBrandFromOrderItem(orderItemPojo).getCategory(),quantityPerBrandCategory.get(orderService.getBrandFromOrderItem(orderItemPojo).getCategory())+orderItemPojo.getQuantity());</span>
 				  }
               //  quantityPerBrandCategory.merge(orderService.getBrandFromOrderItem(orderItemPojo), orderItemPojo.getQuantity(), Integer::sum);
             }
-<span class="nc" id="L120">        }</span>
-<span class="nc" id="L121">        return quantityPerBrandCategory;</span>
+<span class="nc" id="L121">        }</span>
+<span class="nc" id="L122">        return quantityPerBrandCategory;</span>
     }
 
     //Generate revenue based on brand and category
     private Map&lt;String, Double&gt; getMapRevenue(ReportFilter reportFilter, List&lt;OrderItemPojo&gt; orderItemPojoList) throws ApiException {
-<span class="nc" id="L126">        Map&lt;String, Double&gt; revenuePerBrandCategory = new HashMap&lt;&gt;();</span>
-<span class="nc bnc" id="L127" title="All 2 branches missed.">        for (OrderItemPojo orderItemPojo : orderItemPojoList) {</span>
-<span class="nc bnc" id="L128" title="All 2 branches missed.">            if (Equals(orderService.getBrandFromOrderItem(orderItemPojo).getBrand(), reportFilter.getBrand())</span>
-<span class="nc bnc" id="L129" title="All 2 branches missed.">                    &amp;&amp; Equals(orderService.getBrandFromOrderItem(orderItemPojo).getCategory(), reportFilter.getCategory())) {</span>
-<span class="nc bnc" id="L130" title="All 2 branches missed.">            	if(!revenuePerBrandCategory.containsKey(orderService.getBrandFromOrderItem(orderItemPojo).getCategory())){</span>
-<span class="nc" id="L131">          		  revenuePerBrandCategory.put(orderService.getBrandFromOrderItem(orderItemPojo).getCategory(),orderItemPojo.getRevenue());</span>
+<span class="nc" id="L127">        Map&lt;String, Double&gt; revenuePerBrandCategory = new HashMap&lt;&gt;();</span>
+<span class="nc bnc" id="L128" title="All 2 branches missed.">        for (OrderItemPojo orderItemPojo : orderItemPojoList) {</span>
+<span class="nc bnc" id="L129" title="All 2 branches missed.">            if (Equals(orderService.getBrandFromOrderItem(orderItemPojo).getBrand(), reportFilter.getBrand())</span>
+<span class="nc bnc" id="L130" title="All 2 branches missed.">                    &amp;&amp; Equals(orderService.getBrandFromOrderItem(orderItemPojo).getCategory(), reportFilter.getCategory())) {</span>
+<span class="nc bnc" id="L131" title="All 2 branches missed.">            	if(!revenuePerBrandCategory.containsKey(orderService.getBrandFromOrderItem(orderItemPojo).getCategory())){</span>
+<span class="nc" id="L132">          		  revenuePerBrandCategory.put(orderService.getBrandFromOrderItem(orderItemPojo).getCategory(),orderItemPojo.getRevenue());</span>
 				  }else {
-<span class="nc" id="L133">					  revenuePerBrandCategory.put(orderService.getBrandFromOrderItem(orderItemPojo).getCategory(),revenuePerBrandCategory.get(orderService.getBrandFromOrderItem(orderItemPojo).getCategory())+orderItemPojo.getRevenue());</span>
+<span class="nc" id="L134">					  revenuePerBrandCategory.put(orderService.getBrandFromOrderItem(orderItemPojo).getCategory(),revenuePerBrandCategory.get(orderService.getBrandFromOrderItem(orderItemPojo).getCategory())+orderItemPojo.getRevenue());</span>
 				  }
             	
             	//System.out.println(orderItemPojo.getRevenue());
                // revenuePerBrandCategory.merge(orderService.getBrandFromOrderItem(orderItemPojo), orderItemPojo.getRevenue(), Double::sum);
             }
-<span class="nc" id="L139">        }</span>
-<span class="nc" id="L140">        return revenuePerBrandCategory;</span>
+<span class="nc" id="L140">        }</span>
+<span class="nc" id="L141">        return revenuePerBrandCategory;</span>
     }
 
 
     private static Boolean Equals(String a, String b) {
-<span class="nc bnc" id="L145" title="All 4 branches missed.">        return (a.contentEquals(b) || b.isEmpty());</span>
+<span class="nc bnc" id="L146" title="All 4 branches missed.">        return (a.contentEquals(b) || b.isEmpty());</span>
     }
 
     //generates invoice of order
     public OrderInvoiceXmlList generateInvoiceList(int orderId) throws Exception {
-<span class="nc" id="L150">        List&lt;OrderItemPojo&gt; orderItemPojoList = orderService.getOrderItems(orderId);</span>
-<span class="nc" id="L151">        Map&lt;OrderItemPojo,ProductPojo&gt; productPojoList=orderService.getProductPojos(orderItemPojoList);</span>
-<span class="nc" id="L152">        OrderInvoiceXmlList orderInvoiceXmlList = DataConversionUtil.convertToInvoiceDataList(orderItemPojoList,productPojoList);</span>
-<span class="nc" id="L153">        orderInvoiceXmlList.setOrder_id(orderItemPojoList.get(0).getOrderId());</span>
-<span class="nc" id="L154">        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(&quot;yyyy-MM-dd HH:mm&quot;);</span>
-<span class="nc" id="L155">        orderInvoiceXmlList.setDatetime(orderService.getOrder(orderItemPojoList.get(0).getOrderId()).getDatetime().format(formatter));</span>
-<span class="nc" id="L156">        double total = calculateTotal(orderInvoiceXmlList);</span>
-<span class="nc" id="L157">        orderInvoiceXmlList.setTotal(total);</span>
-<span class="nc" id="L158">        OrderPojo orderPojo= orderService.getOrder(orderId);</span>
-<span class="nc" id="L159">        orderPojo.setIsInvoiceGenerated(true);</span>
-<span class="nc" id="L160">        orderService.update(orderId,orderPojo);</span>
-<span class="nc" id="L161">        return orderInvoiceXmlList;</span>
+<span class="nc" id="L151">        List&lt;OrderItemPojo&gt; orderItemPojoList = orderService.getOrderItems(orderId);</span>
+<span class="nc" id="L152">        Map&lt;OrderItemPojo,ProductPojo&gt; productPojoList=orderService.getProductPojos(orderItemPojoList);</span>
+<span class="nc" id="L153">        OrderInvoiceXmlList orderInvoiceXmlList = DataConversionUtil.convertToInvoiceDataList(orderItemPojoList,productPojoList);</span>
+<span class="nc" id="L154">        orderInvoiceXmlList.setOrder_id(orderItemPojoList.get(0).getOrderId());</span>
+<span class="nc" id="L155">        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(&quot;yyyy-MM-dd HH:mm&quot;);</span>
+<span class="nc" id="L156">        orderInvoiceXmlList.setDatetime(orderService.getOrder(orderItemPojoList.get(0).getOrderId()).getDatetime().format(formatter));</span>
+<span class="nc" id="L157">        double total = calculateTotal(orderInvoiceXmlList);</span>
+<span class="nc" id="L158">        orderInvoiceXmlList.setTotal(total);</span>
+<span class="nc" id="L159">        OrderPojo orderPojo= orderService.getOrder(orderId);</span>
+<span class="nc" id="L160">        orderPojo.setIsInvoiceGenerated(true);</span>
+<span class="nc" id="L161">        orderService.update(orderId,orderPojo);</span>
+<span class="nc" id="L162">        return orderInvoiceXmlList;</span>
     }
 
     //Calculates total cost of order
     private static double calculateTotal(OrderInvoiceXmlList orderInvoiceXmlList) {
-<span class="nc" id="L166">        double total = 0;</span>
-<span class="nc bnc" id="L167" title="All 2 branches missed.">        for (OrderInvoiceData orderInvoiceData : orderInvoiceXmlList.getOrderInvoiceData()) {</span>
-<span class="nc" id="L168">            total += (orderInvoiceData.getMrp() * orderInvoiceData.getQuantity());</span>
-<span class="nc" id="L169">        }</span>
-<span class="nc" id="L170">        return total;</span>
+<span class="nc" id="L167">        double total = 0;</span>
+<span class="nc bnc" id="L168" title="All 2 branches missed.">        for (OrderInvoiceData orderInvoiceData : orderInvoiceXmlList.getOrderInvoiceData()) {</span>
+<span class="nc" id="L169">            total += (orderInvoiceData.getMrp() * orderInvoiceData.getQuantity());</span>
+<span class="nc" id="L170">        }</span>
+<span class="nc" id="L171">        return total;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

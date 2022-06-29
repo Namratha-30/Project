@@ -27,8 +27,11 @@ function getSalesReport(){
 	      	link.click();
 		   },
 		   error: function(response){
-
+                toastr.options.closeButton=false;
+                toastr.options.timeOut=3000;
 		   		toastr.error("No sales data was found within given date range and brand category pair");
+                toastr.options.closeButton=true;
+                toastr.options.timeOut=0;
 		   }
 		});
 	}
@@ -65,11 +68,19 @@ function startDateValidation() {
 function validateSalesForm(json) {
 	json = JSON.parse(json);
 	if(!brandList.includes(json.brand) && !isBlank(json.brand)) {
+	 toastr.options.closeButton=false;
+                toastr.options.timeOut=3000;
 		toastr.error("Please enter valid brand");
+                toastr.options.closeButton=true;
+                toastr.options.timeOut=0;
 		return false;
 	}
 	if(!categoryList.includes(json.category) && !isBlank(json.category)) {
+	 toastr.options.closeButton=false;
+                toastr.options.timeOut=3000;
 		toastr.error("Please enter valid category");
+                toastr.options.closeButton=true;
+                toastr.options.timeOut=0;
 		return false;
 	}
 	return true;

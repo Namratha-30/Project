@@ -110,29 +110,88 @@ function getProductList(){
 function validateProduct(json) {
 	json = JSON.parse(json);
 	if(isBlank(json.brand)) {
-		toastr.error("Brand field must not be empty");
+	        toastr.options.closeButton=false;
+            toastr.options.timeOut=3000;
+            toastr.error("Brand field must not be empty");
+            toastr.options.closeButton=true;
+            toastr.options.timeOut=0;
+	     
+		return false;
+	}
+	if(isfull(json.brand)) {
+	        toastr.options.closeButton=false;
+            toastr.options.timeOut=3000;
+		    toastr.error("Maximum string value of brand exceeded");
+            toastr.options.closeButton=true;
+            toastr.options.timeOut=0;
+	     
 		return false;
 	}
 	if(isBlank(json.category)) {
-		toastr.error("Category field must not be empty");
+	      toastr.options.closeButton=false;
+            toastr.options.timeOut=3000;
+		    toastr.error("Category field must not be empty");
+            toastr.options.closeButton=true;
+            toastr.options.timeOut=0;
+		return false;
+	}
+	if(isfull(json.category)) {
+	    toastr.options.closeButton=false;
+            toastr.options.timeOut=3000;
+		   toastr.error("Maximum string value of category exceeded");
+            toastr.options.closeButton=true;
+            toastr.options.timeOut=0;
 		return false;
 	}
 	if(isBlank(json.barcode)) {
-		toastr.error("Barcode field must not be empty");
+	        toastr.options.closeButton=false;
+            toastr.options.timeOut=3000;
+		    toastr.error("Barcode field must not be empty");
+            toastr.options.closeButton=true;
+            toastr.options.timeOut=0;
+		return false;
+	}
+	if(isfull(json.barcode)) {
+	    toastr.options.closeButton=false;
+            toastr.options.timeOut=3000;
+		    toastr.error("Maximum string value of barcode exceeded");
+            toastr.options.closeButton=true;
+            toastr.options.timeOut=0;
 		return false;
 	}
 	if(isBlank(json.name)) {
-		toastr.error("Name field must not be empty");
+	    toastr.options.closeButton=false;
+            toastr.options.timeOut=3000;
+		    toastr.error("Name field must not be empty");
+            toastr.options.closeButton=true;
+            toastr.options.timeOut=0;
+		return false;
+	}
+	if(isfull(json.name)) {
+	     toastr.options.closeButton=false;
+            toastr.options.timeOut=3000;
+		toastr.error("Maximum string value of name exceeded");
+            toastr.options.closeButton=true;
+            toastr.options.timeOut=0;
 		return false;
 	}
 	if(isBlank(json.mrp)) {
+	    toastr.options.closeButton=false;
+            toastr.options.timeOut=3000;
 		toastr.error("Mrp field must not be empty");
+            toastr.options.closeButton=true;
+            toastr.options.timeOut=0;
 		return false;
 	}
 	else if(isNaN(json.mrp)){
+	          toastr.options.closeButton=false;
+            toastr.options.timeOut=3000;
            	    toastr.error("Mrp field: "+ json.mrp+" must be a float value");
+            toastr.options.closeButton=true;
+            toastr.options.timeOut=0;
                        		return false;
            	}
+   
 	return true;
 }
 
@@ -141,29 +200,90 @@ function validateProductUpload(arr){
         var row=arr[i];
         console.log(row);
        if(isBlank(row.brand)) {
-       		toastr.error("Brand field must not be empty");
+       		 toastr.options.closeButton=false;
+            toastr.options.timeOut=3000;
+            toastr.error("Brand field must not be empty");
+            toastr.options.closeButton=true;
+            toastr.options.timeOut=0;
        		return false;
        	}
+       	if(isfull(row.brand)) {
+          toastr.options.closeButton=false;
+            toastr.options.timeOut=3000;
+		    toastr.error("Maximum string value of brand exceeded");
+            toastr.options.closeButton=true;
+            toastr.options.timeOut=0;    
+               		return false;
+       	}
+       	
        	if(isBlank(row.category)) {
-       		toastr.error("Category field must not be empty");
+            toastr.options.closeButton=false;
+            toastr.options.timeOut=3000;
+		    toastr.error("Category field must not be empty");
+            toastr.options.closeButton=true;
+            toastr.options.timeOut=0;
+                   		return false;
+       	}
+       	if(isfull(row.category)) {
+       		 toastr.options.closeButton=false;
+            toastr.options.timeOut=3000;
+		   toastr.error("Maximum string value of category exceeded");
+            toastr.options.closeButton=true;
+            toastr.options.timeOut=0;
        		return false;
        	}
+       	
        	if(isBlank(row.barcode)) {
-       		toastr.error("Barcode field must not be empty");
+       		 toastr.options.closeButton=false;
+            toastr.options.timeOut=3000;
+		    toastr.error("Barcode field must not be empty");
+            toastr.options.closeButton=true;
+            toastr.options.timeOut=0;
        		return false;
        	}
+       	if(isfull(row.barcode)) {
+       		 toastr.options.closeButton=false;
+            toastr.options.timeOut=3000;
+		    toastr.error("Maximum string value of barcode exceeded");
+            toastr.options.closeButton=true;
+            toastr.options.timeOut=0;
+       		return false;
+       	}
+       	
        	if(isBlank(row.name)) {
-       		toastr.error("Name field must not be empty");
+       		 toastr.options.closeButton=false;
+            toastr.options.timeOut=3000;
+		    toastr.error("Name field must not be empty");
+            toastr.options.closeButton=true;
+            toastr.options.timeOut=0;
        		return false;
        	}
+       	if(isfull(row.name)) {
+       		 toastr.options.closeButton=false;
+            toastr.options.timeOut=3000;
+		toastr.error("Maximum string value of name exceeded");
+            toastr.options.closeButton=true;
+            toastr.options.timeOut=0;
+       		return false;
+       	}
+       	
        	if(isBlank(row.mrp)) {
-       		toastr.error("Mrp field must not be empty");
+       		toastr.options.closeButton=false;
+            toastr.options.timeOut=3000;
+		toastr.error("Mrp field must not be empty");
+            toastr.options.closeButton=true;
+            toastr.options.timeOut=0;
        		return false;
        	}
        	else if(isNaN((row.mrp))){
-       	    toastr.error("Mrp field: "+ row.mrp+" must be a float value");
+       	   toastr.options.closeButton=false;
+            toastr.options.timeOut=3000;
+           	    toastr.error("Mrp field: "+ row.mrp+" must be a float value");
+            toastr.options.closeButton=true;
+            toastr.options.timeOut=0;
                    		return false;
        	}
+       
 
     }
     return true;
@@ -213,7 +333,12 @@ function uploadRows(){
     	   },
     	   error: function(response){
     	        console.log(response);
+    	        toastr.options.closeButton=false;
+            toastr.options.timeOut=3000;
                 toastr.error("File cannot be uploaded: "+JSON.parse(response.responseText).message);
+            toastr.options.closeButton=true;
+            toastr.options.timeOut=0;
+                resetUploadDialog();
     	   }
     	});
     }
@@ -232,8 +357,8 @@ function displayProductList(tabledata){
 		'querySet': tabledata,
 	
 		'page': 1,
-		'rows': 5,
-		'window': 5,
+		'rows': 8,
+		'window': 8,
 	}
 	
 	buildTable()

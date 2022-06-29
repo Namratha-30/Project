@@ -34,8 +34,10 @@ public class ProductController extends ExceptionHandler{
     @ApiOperation(value = "Adds a product")
     @RequestMapping(path = "", method = RequestMethod.POST)
     public void add(@RequestBody ProductForm productForm) throws ApiException {
+    	
         productForm.setBrand(productForm.getBrand().toLowerCase().trim());
         productForm.setCategory(productForm.getCategory().toLowerCase().trim());
+       
         BrandPojo brandPojo=brandService.getBrandPojo(productForm.getBrand(), productForm.getCategory());
         productService.add(DataConversionUtil.convert(productForm,brandPojo));
     }
@@ -86,6 +88,7 @@ public class ProductController extends ExceptionHandler{
         ProductPojo productPojo= productService.get(id);
         productForm.setBrand(brandService.get(productPojo.getBrandCategory()).getBrand());
         productForm.setCategory(brandService.get(productPojo.getBrandCategory()).getCategory());
+        
         BrandPojo brandPojo=brandService.getBrandPojo(productForm.getBrand(), productForm.getCategory());
         productService.update(id, DataConversionUtil.convert(productForm,brandPojo));
     }

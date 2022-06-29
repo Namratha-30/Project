@@ -30,6 +30,8 @@ public class ProductService {
     @Transactional(rollbackOn = ApiException.class)
     public void add(ProductPojo productPojo) throws ApiException{
         normalize(productPojo);
+        
+    	
         check(productPojo);
         ProductPojo productPojo1= productDao.selectIdFromBarcode(productPojo.getBarcode());
         if(productPojo1!=null) {
@@ -97,6 +99,7 @@ public class ProductService {
         check(productPojo);
         normalize(productPojo);
         ProductPojo productPojo1 = getCheck(id);
+      // ProductPojo productPojo2=getCheckBarcode(productPojo.getBarcode());
         productPojo1.setBarcode(productPojo.getBarcode());
         productPojo1.setName(productPojo.getName());
         productPojo1.setMrp(Math.round(productPojo.getMrp()*100.0)/100.0);
@@ -104,7 +107,17 @@ public class ProductService {
     }
 
 
-    //HELPER METHODS
+	
+	/*
+	 * private ProductPojo getCheckBarcode(String barcode) throws ApiException {
+	 * ProductPojo productPojo = productDao.selectIdFromBarcode(barcode); if
+	 * (productPojo!=null && productPojo.getBarcode()!=barcode) { throw new
+	 * ApiException("Product with given barcode: " + barcode+" already exist"); }
+	 * return productPojo; }
+	 */
+	 
+
+	//HELPER METHODS
     //checks whether product pojo is valid or not
     public void check(ProductPojo productPojo) throws ApiException {
         if(StringUtil.isEmpty(productPojo.getBarcode())) {

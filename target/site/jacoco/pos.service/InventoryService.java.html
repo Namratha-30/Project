@@ -34,10 +34,10 @@ import java.util.List;
     public void add(InventoryPojo inventoryPojo) throws ApiException{
 <span class="fc" id="L35">        check(inventoryPojo);</span>
 <span class="fc" id="L36">        InventoryPojo inventoryPojo1=inventoryDao.selectByProductId(inventoryPojo.getProductId());</span>
-<span class="pc bpc" id="L37" title="1 of 2 branches missed.">        if(inventoryPojo1!=null)</span>
+<span class="fc bfc" id="L37" title="All 2 branches covered.">        if(inventoryPojo1!=null)</span>
         {
-<span class="nc" id="L39">            inventoryPojo.setQuantity(inventoryPojo.getQuantity()+inventoryPojo1.getQuantity());</span>
-<span class="nc" id="L40">            update(inventoryPojo1.getId(),inventoryPojo );</span>
+<span class="fc" id="L39">            inventoryPojo.setQuantity(inventoryPojo.getQuantity()+inventoryPojo1.getQuantity());</span>
+<span class="fc" id="L40">            update(inventoryPojo1.getId(),inventoryPojo );</span>
         }
         else
 <span class="fc" id="L43">        inventoryDao.insert(inventoryPojo);</span>
@@ -46,13 +46,13 @@ import java.util.List;
 
     @Transactional(rollbackOn = ApiException.class)
     public void addList(List&lt;InventoryPojo&gt; inventoryPojoList) throws ApiException {
-<span class="nc bnc" id="L49" title="All 2 branches missed.">        for (InventoryPojo inventoryPojo:inventoryPojoList){</span>
-<span class="nc" id="L50">            check(inventoryPojo);</span>
-<span class="nc" id="L51">        }</span>
-<span class="nc bnc" id="L52" title="All 2 branches missed.">        for (InventoryPojo inventoryPojo:inventoryPojoList){</span>
-<span class="nc" id="L53">            add(inventoryPojo);</span>
-<span class="nc" id="L54">        }</span>
-<span class="nc" id="L55">    }</span>
+<span class="fc bfc" id="L49" title="All 2 branches covered.">        for (InventoryPojo inventoryPojo:inventoryPojoList){</span>
+<span class="fc" id="L50">            check(inventoryPojo);</span>
+<span class="fc" id="L51">        }</span>
+<span class="fc bfc" id="L52" title="All 2 branches covered.">        for (InventoryPojo inventoryPojo:inventoryPojoList){</span>
+<span class="fc" id="L53">            add(inventoryPojo);</span>
+<span class="fc" id="L54">        }</span>
+<span class="fc" id="L55">    }</span>
     
     //retrieves a product inventory by id
     @Transactional(rollbackOn = ApiException.class)
@@ -97,8 +97,8 @@ import java.util.List;
     @Transactional
     public InventoryPojo getFromProductId(int productId) throws ApiException {
 <span class="fc" id="L99">        InventoryPojo inventoryPojo = inventoryDao.selectByProductId(productId);</span>
-<span class="pc bpc" id="L100" title="1 of 2 branches missed.">        if(inventoryPojo == null){</span>
-<span class="nc" id="L101">            throw new ApiException(&quot;Inventory with given productId: &quot; + productId+&quot; does not exist&quot;);</span>
+<span class="fc bfc" id="L100" title="All 2 branches covered.">        if(inventoryPojo == null){</span>
+<span class="fc" id="L101">            throw new ApiException(&quot;Inventory with given productId: &quot; + productId+&quot; does not exist&quot;);</span>
         }
 <span class="fc" id="L103">        return inventoryPojo;</span>
     }
@@ -106,9 +106,9 @@ import java.util.List;
     //retrieves brand pojo from inventory pojo
     @Transactional
     public BrandPojo getBrandFromInventory(InventoryPojo inventoryPojo) throws ApiException {
-<span class="nc" id="L109">        getCheck(inventoryPojo.getId());</span>
-<span class="nc" id="L110">        ProductPojo productPojo= productDao.select(inventoryPojo.getProductId());</span>
-<span class="nc" id="L111">        return brandDao.select(productPojo.getBrandCategory());</span>
+<span class="fc" id="L109">        getCheck(inventoryPojo.getId());</span>
+<span class="fc" id="L110">        ProductPojo productPojo= productDao.select(inventoryPojo.getProductId());</span>
+<span class="fc" id="L111">        return brandDao.select(productPojo.getBrandCategory());</span>
     }
     
 }

@@ -37,7 +37,7 @@ public abstract class AbstractUnitTest {
 	    protected List<InventoryPojo> inventoryPojoList;
 	    protected List<OrderPojo> orderPojoList;
 	    protected List<OrderItemPojo> orderItemPojoList;
-
+	    
 	    //Declaring all the pojo and assiging values for testing
 	    protected void declare() throws ApiException {
 	        brandPojoList = new ArrayList<>();

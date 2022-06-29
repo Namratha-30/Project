@@ -71,7 +71,9 @@ public class OrderService {
     public List<OrderItemPojo> getOrderItems(int orderId) throws ApiException {
         @SuppressWarnings("unused")
 		OrderPojo orderPojo=checkIfExistsOrder(orderId);
+       
         return orderItemDao.selectByOrderId(orderId);
+     
     }
 
     // Fetching an Order by id
@@ -141,17 +143,13 @@ public class OrderService {
         inventoryService.getFromProductId(orderItemPojo.getProductId()).setQuantity(quantityInInventory - quantity);
     }
 
-    public int add()
-    {
-     return 2;
-    }
-    
+   
     
     //checks whether a given orderItem orderItemPojo is valid or not
     public void check(OrderItemPojo orderItemPojo)throws ApiException {
        // System.out.println("check3");
     	if(productService.get(orderItemPojo.getProductId())==null) {
-        	System.out.println(orderItemPojo.getProductId());
+        	//System.out.println(orderItemPojo.getProductId());
         	
             throw new ApiException("Product with this id does not exist");
         }
@@ -205,10 +203,13 @@ public class OrderService {
     public List<OrderItemPojo> getOrderItemInDate(LocalDateTime startDate, LocalDateTime endDate) throws ApiException {
         List<OrderPojo>  orderPojoList=orderDao.getByDate(startDate,endDate);
         List<OrderItemPojo> orderItemPojoList=new ArrayList<>();
+
         for(OrderPojo orderPojo:orderPojoList){
+            if(orderPojo.getIsInvoiceGenerated()) {
             List<OrderItemPojo> orderItemPojoList1=getOrderItems(orderPojo.getId());
-            orderItemPojoList.addAll(orderItemPojoList1);
+            orderItemPojoList.addAll(orderItemPojoList1);}
         }
+        
         return orderItemPojoList;
     }
 }

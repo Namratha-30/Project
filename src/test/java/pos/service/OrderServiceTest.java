@@ -9,6 +9,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import pos.pojo.BrandPojo;
 import pos.pojo.OrderItemPojo;
 import pos.pojo.OrderPojo;
 import pos.pojo.ProductPojo;
@@ -82,6 +83,107 @@ public class OrderServiceTest extends AbstractUnitTest {
         assertEquals(orderItemPojoList.get(0).getSp(), orderItemPojo.getSp(), 0.001);
     }
 
+    @Test
+    public void testAddOrderItem() throws ApiException {
+    	OrderItemPojo oitempojo=orderItemPojoList.get(0);
+    	//OrderPojo opojo=orderPojoList.get(0);
+    	orderService.addOrderItem(orderId, oitempojo);
+    	
+    	 OrderItemPojo orderItemPojo = orderService.get(oitempojo.getId());
+         assertEquals(oitempojo.getOrderId(), orderItemPojo.getOrderId());
+         
+    	
+    }
+    
+	
+	  @Test public void testUpdateOrderPojo() throws ApiException { OrderPojo
+	  opojo=orderPojoList.get(0); int id=opojo.getId(); orderService.update(id,
+	  opojo); OrderPojo opojo1=orderService.getOrder(id);
+	  assertEquals(opojo.getId(),opojo1.getId()); }
+	 
+	  @Test
+	  public void testUpdateInventory() throws ApiException {
+		  OrderItemPojo oitempojo=new OrderItemPojo();
+		  oitempojo.setProductId(productPojoList.get(2).getId());
+		  oitempojo.setQuantity(2);
+		  oitempojo.setSp(1000.0);
+		  try {
+			  orderService.updateInventory(oitempojo,0);
+			  fail("ApiException did not occur");
+	        } catch (ApiException e) {
+	            assertEquals(e.getMessage(), "Inventory for this item: "+ productService.get(oitempojo.getProductId()).getBarcode()+" does not exist");
+	        }
+	  }
+	  
+	  //testing when order quantity is more than inventory quantity
+	  @Test
+	  public void testLessInventory() throws ApiException {
+		  OrderItemPojo oitempojo=new OrderItemPojo();
+		  oitempojo.setProductId(productPojoList.get(0).getId());
+		  oitempojo.setQuantity(800);
+		  oitempojo.setSp(1000.0);
+		  int quantInInventory=inventoryService.getFromProductId(oitempojo.getProductId()).getQuantity() + 0;
+		  try
+		  {
+			  orderService.updateInventory(oitempojo,0);
+			  fail("ApiException did not occur");
+	        } catch (ApiException e) {
+	            assertEquals(e.getMessage(), "The current product inventory is: "
+                        + quantInInventory+" order cannot be placed more than that");
+	        }
+	  }
+	  
+	  @Test
+	  public void  testGetBrandFromOrderItem() throws ApiException {
+		  OrderItemPojo oitempojo=orderItemPojoList.get(0);
+		  BrandPojo bpojo1=brandPojoList.get(0);
+		  BrandPojo bpojo=orderService.getBrandFromOrderItem(oitempojo);
+		  assertEquals(bpojo1.getBrand(),bpojo.getBrand());
+	  }
+	  
+	  @Test
+	  public void testCheckIfExistsOrder() {
+		  try {
+			  orderService.checkIfExistsOrder(220);
+			  fail("ApiException did not occur");
+	        } catch (ApiException e) {
+	            assertEquals(e.getMessage(), "Order with given ID: " + 220+" does not exist");
+	        }
+	  }
+	/*
+	 * //testing id productid of OrderItemPojo exists
+	 * 
+	 * @Test public void testIfOrderProductIfExists() { OrderItemPojo oitempojo=new
+	 * OrderItemPojo(); oitempojo.setProductId(-22); oitempojo.setQuantity(2);
+	 * oitempojo.setSp(1000.0); try { orderService.check(oitempojo);
+	 * fail("ApiException did not occur"); } catch (ApiException e) {
+	 * assertEquals(e.getMessage(), "Product with this id does not exist"); } }
+	 */
+	  
+	  //testing if selling price is valid or not
+	  @Test
+	  public void testIfOrderSellingPrice() {
+		  OrderItemPojo oitempojo=new OrderItemPojo();
+		  oitempojo.setProductId(productPojoList.get(0).getId());
+		  oitempojo.setQuantity(2);
+		  oitempojo.setSp(-1000.0);
+		  try {
+			  orderService.check(oitempojo);
+			  fail("ApiException did not occur");
+	        } catch (ApiException e) {
+	            assertEquals(e.getMessage(),"Selling price must be positive");
+	        }
+	  }
+	  
+	  @Test
+	  public void testCheckIfExists() {
+		  try {
+			  orderService.checkIfExists(-22);
+			  fail("ApiException did not occur");
+	        } catch (ApiException e) {
+	            assertEquals(e.getMessage(),"OrderItem with given ID: " + -22+" does not exist");
+	        }
+	  }
 
     //returns an orderItem pojo
     private OrderItemPojo getOrderItemPojo(ProductPojo productPojo, int quantity, double sp) {
@@ -101,4 +203,7 @@ public class OrderServiceTest extends AbstractUnitTest {
         orderItemPojo.setSp(30.0);
         return orderItemPojo;
     }
+    
+    
+    
 }

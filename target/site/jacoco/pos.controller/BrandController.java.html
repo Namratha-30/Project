@@ -29,51 +29,52 @@ import java.util.List;
     @ApiOperation(value = &quot;Adding a brand&quot;)
     @RequestMapping(path = &quot;&quot;, method = RequestMethod.POST)
     public void add(@RequestBody BrandForm brandForm) throws ApiException {
-<span class="nc" id="L32">        BrandPojo brandPojo= DataConversionUtil.convert(brandForm);</span>
-<span class="nc" id="L33">        brandService.add(brandPojo);</span>
-<span class="nc" id="L34">    }</span>
+    	
+<span class="nc" id="L33">        BrandPojo brandPojo= DataConversionUtil.convert(brandForm);</span>
+<span class="nc" id="L34">        brandService.add(brandPojo);</span>
+<span class="nc" id="L35">    }</span>
     
     //Add brands using TSV
     @ApiOperation(value = &quot;Adds list of brands&quot;)
     @RequestMapping(path = &quot;/list&quot;, method = RequestMethod.POST)
     public void add(@RequestBody List&lt;BrandForm&gt; brandForm) throws ApiException {
 
-<span class="nc" id="L41">        List&lt;BrandPojo&gt; brandPojoList=new ArrayList&lt;&gt;();</span>
-<span class="nc bnc" id="L42" title="All 2 branches missed.">	     if(brandForm.size()==0) {</span>
-<span class="nc" id="L43">	    	 throw new ApiException(&quot;List size cannot be zero&quot;);</span>
+<span class="nc" id="L42">        List&lt;BrandPojo&gt; brandPojoList=new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L43" title="All 2 branches missed.">	     if(brandForm.size()==0) {</span>
+<span class="nc" id="L44">	    	 throw new ApiException(&quot;List size cannot be zero&quot;);</span>
 	     }
 		 
-<span class="nc bnc" id="L46" title="All 2 branches missed.">        for(BrandForm brandForm1:brandForm) {</span>
-<span class="nc" id="L47">            BrandPojo brandPojo = DataConversionUtil.convert(brandForm1);</span>
-<span class="nc" id="L48">            brandPojoList.add(brandPojo);</span>
-<span class="nc" id="L49">        }</span>
-<span class="nc" id="L50">        brandService.addList(brandPojoList);</span>
+<span class="nc bnc" id="L47" title="All 2 branches missed.">        for(BrandForm brandForm1:brandForm) {</span>
+<span class="nc" id="L48">            BrandPojo brandPojo = DataConversionUtil.convert(brandForm1);</span>
+<span class="nc" id="L49">            brandPojoList.add(brandPojo);</span>
+<span class="nc" id="L50">        }</span>
+<span class="nc" id="L51">        brandService.addList(brandPojoList);</span>
     	
-<span class="nc" id="L52">    }</span>
+<span class="nc" id="L53">    }</span>
 
     //Retrieve a brand using id
     @ApiOperation(value = &quot;Get a brand by Id&quot;)
     @RequestMapping(path = &quot;/{id}&quot;, method = RequestMethod.GET)
     public BrandData get(@PathVariable int id) throws ApiException {
-<span class="nc" id="L58">        BrandPojo brandPojo = brandService.get(id);</span>
-<span class="nc" id="L59">        return DataConversionUtil.convert(brandPojo);</span>
+<span class="nc" id="L59">        BrandPojo brandPojo = brandService.get(id);</span>
+<span class="nc" id="L60">        return DataConversionUtil.convert(brandPojo);</span>
     }
 
     //Retrieve complete list of all brands
     @ApiOperation(value = &quot;Get list of all brands&quot;)
     @RequestMapping(path = &quot;&quot;, method = RequestMethod.GET)
     public List&lt;BrandData&gt; getAll() throws ApiException{
-<span class="nc" id="L66">        List&lt;BrandPojo&gt; brandPojoList = brandService.getAll();</span>
-<span class="nc" id="L67">        return DataConversionUtil.convert(brandPojoList);</span>
+<span class="nc" id="L67">        List&lt;BrandPojo&gt; brandPojoList = brandService.getAll();</span>
+<span class="nc" id="L68">        return DataConversionUtil.convert(brandPojoList);</span>
     }
 
     //Updates a brand
     @ApiOperation(value = &quot;Updates a brand&quot;)
     @RequestMapping(path = &quot;/{id}&quot;, method = RequestMethod.PUT)
     public void update(@PathVariable int id, @RequestBody BrandForm brandForm) throws ApiException {
-<span class="nc" id="L74">        BrandPojo brandPojo = DataConversionUtil.convert(brandForm);</span>
-<span class="nc" id="L75">        brandService.update(id, brandPojo);</span>
-<span class="nc" id="L76">    }</span>
+<span class="nc" id="L75">        BrandPojo brandPojo = DataConversionUtil.convert(brandForm);</span>
+<span class="nc" id="L76">        brandService.update(id, brandPojo);</span>
+<span class="nc" id="L77">    }</span>
    
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

@@ -29,6 +29,7 @@ public class BrandController extends ExceptionHandler{
     @ApiOperation(value = "Adding a brand")
     @RequestMapping(path = "", method = RequestMethod.POST)
     public void add(@RequestBody BrandForm brandForm) throws ApiException {
+    	
         BrandPojo brandPojo= DataConversionUtil.convert(brandForm);
         brandService.add(brandPojo);
     }

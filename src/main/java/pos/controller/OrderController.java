@@ -44,6 +44,9 @@ public class OrderController extends ExceptionHandler{
     @ApiOperation(value = "Adds Order Items")
     @RequestMapping(path = "/api/orders", method = RequestMethod.POST)
     public void add(@RequestBody OrderItemForm[] orderItemForms) throws ApiException{
+        //orderItemForm.setBarcode(orderItemForm.getBarcode().toLowerCase().trim());
+        
+    	
         Map<String, ProductPojo> allProductPojoByBarcode = productService.getAllProductPojosByBarcode();
         
         List<OrderItemPojo> orderItemList = DataConversionUtil.convertOrderItemForms(allProductPojoByBarcode, orderItemForms);

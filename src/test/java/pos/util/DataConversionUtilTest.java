@@ -247,26 +247,23 @@ public class DataConversionUtilTest extends AbstractUnitTest{
     }
     
 
-    // Test conversion to sales list
-	/*
-	 * @Test public void testConvertSalesList() { Map<BrandPojo, Integer>
-	 * quantityPerBrandPojo = new HashMap<>(); Map<BrandPojo, Double>
-	 * revenuePerBrandCategory = new HashMap<>(); BrandPojo brandPojo = new
-	 * BrandPojo(); brandPojo.setBrand("brand1");
-	 * brandPojo.setCategory("category1"); BrandPojo brandPojo1 = new BrandPojo();
-	 * brandPojo1.setBrand("brand2"); brandPojo1.setCategory("category2");
-	 * quantityPerBrandPojo.put(brandPojo, 1); quantityPerBrandPojo.put(brandPojo1,
-	 * 2); revenuePerBrandCategory.put(brandPojo, 100.00);
-	 * revenuePerBrandCategory.put(brandPojo1, 200.00); SaleXmlList saleXmlList =
-	 * DataConversionUtil.convertSalesList(quantityPerBrandPojo,
-	 * revenuePerBrandCategory); assertEquals(2,
-	 * saleXmlList.getSaleReportDataList().size()); }
-	 */
-    
-	/*
-	 * @Test public void testConvertOrderItemFormstoList() {
-	 * 
-	 * }
-	 */
+ // Test conversion to sales list
+    @Test
+    public void testConvertSalesList() {
+        Map<String, Integer> quantityPerBrandPojo = new HashMap<>();
+        Map<String, Double> revenuePerBrandCategory = new HashMap<>();
+        BrandPojo brandPojo = new BrandPojo();
+        brandPojo.setBrand("brand1");
+        brandPojo.setCategory("category1");
+        BrandPojo brandPojo1 = new BrandPojo();
+        brandPojo1.setBrand("brand2");
+        brandPojo1.setCategory("category2");
+        quantityPerBrandPojo.put(brandPojo.getCategory(), 1);
+        quantityPerBrandPojo.put(brandPojo1.getCategory(), 2);
+        revenuePerBrandCategory.put(brandPojo.getCategory(), 100.00);
+        revenuePerBrandCategory.put(brandPojo1.getCategory(), 200.00);
+        SaleXmlList saleXmlList = DataConversionUtil.convertSalesList(quantityPerBrandPojo, revenuePerBrandCategory);
+        assertEquals(2, saleXmlList.getSaleReportDataList().size());
+    }
     
 }

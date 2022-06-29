@@ -46,7 +46,7 @@ public class ReportService {
         else if (type.contentEquals("sales")) {
 
             SaleXmlList saleXmlList = generateSalesList((ReportFilter) obj[0]);
-            System.out.println((ReportFilter) obj[0]);
+           // System.out.println((ReportFilter) obj[0]);
             if(saleXmlList.getSaleReportDataList().isEmpty()) {
                 throw new ApiException("No sales was done in this date range for this particular brand and category pair");
             }
@@ -89,6 +89,7 @@ public class ReportService {
     //Generate sales list for sales report
     public SaleXmlList generateSalesList(ReportFilter reportFilter) throws Exception {
         List<OrderItemPojo> orderItemPojoList1 = FilterByDate(reportFilter);
+        System.out.println(orderItemPojoList1.size());
         Map<String, Integer> quantityPerBrandCategory = getMapQuantity(reportFilter, orderItemPojoList1);
         Map<String, Double> revenuePerBrandCategory = getMapRevenue(reportFilter, orderItemPojoList1);
        // System.out.println(revenuePerBrandCategory);

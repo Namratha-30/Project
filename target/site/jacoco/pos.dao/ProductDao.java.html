@@ -27,16 +27,16 @@ import java.util.List;
 
     //Retrieve all products
     public List&lt;ProductPojo&gt; selectAll() {
-<span class="nc" id="L30">        String select_all = &quot;select p from ProductPojo p&quot;;</span>
-<span class="nc" id="L31">        TypedQuery&lt;ProductPojo&gt; query = getQuery(select_all,  ProductPojo.class);</span>
-<span class="nc" id="L32">        return query.getResultList();</span>
+<span class="fc" id="L30">        String select_all = &quot;select p from ProductPojo p&quot;;</span>
+<span class="fc" id="L31">        TypedQuery&lt;ProductPojo&gt; query = getQuery(select_all,  ProductPojo.class);</span>
+<span class="fc" id="L32">        return query.getResultList();</span>
     }
 
     //Update a product pojo
     //TODO
     public void update(int id,ProductPojo productPojo) {
     	
-<span class="nc" id="L39">    }</span>
+<span class="fc" id="L39">    }</span>
 
     //Retrieve product pojo from barcode
     public ProductPojo selectIdFromBarcode(String barcode){
@@ -44,8 +44,8 @@ import java.util.List;
 <span class="fc" id="L44">        TypedQuery&lt;ProductPojo&gt; query = getQuery(select_id_barcode, ProductPojo.class);</span>
 <span class="fc" id="L45">        query.setParameter(&quot;barcode&quot;, barcode);</span>
 <span class="fc" id="L46">        List&lt;ProductPojo&gt; res=query.getResultList();</span>
-<span class="pc bpc" id="L47" title="1 of 2 branches missed.">        if(res.size()&gt;0){</span>
-<span class="nc" id="L48">            return res.get(0);</span>
+<span class="fc bfc" id="L47" title="All 2 branches covered.">        if(res.size()&gt;0){</span>
+<span class="fc" id="L48">            return res.get(0);</span>
         }
         else
 <span class="fc" id="L51">            return null;</span>

@@ -29,6 +29,7 @@ public class BrandService {
     public void add(BrandPojo brandPojo) throws ApiException{
 
         normalize(brandPojo);
+       
         check(brandPojo);
         brandDao.insert(brandPojo);
     }
@@ -149,6 +150,7 @@ public class BrandService {
 		}
 		if(!hMapProducts.isEmpty())
 		{
+			System.out.println(hMapProducts);
 			throw new ApiException("The following brand and category combinations does not exists: "+hMapProducts);
 		}
 	}

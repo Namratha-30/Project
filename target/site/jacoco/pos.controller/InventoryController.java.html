@@ -13,6 +13,7 @@ import pos.service.ApiException;
 import pos.service.InventoryService;
 import pos.service.ProductService;
 import pos.util.DataConversionUtil;
+import pos.util.StringUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +22,7 @@ import java.util.List;
 @Api
 @RestController
 @RequestMapping(path=&quot;/api/inventories&quot;)
-<span class="fc" id="L24">public class InventoryController extends ExceptionHandler{</span>
+<span class="fc" id="L25">public class InventoryController extends ExceptionHandler{</span>
 
     @Autowired
     private InventoryService inventoryService;
@@ -33,57 +34,60 @@ import java.util.List;
     @ApiOperation(value = &quot;Adds a product to inventory&quot;)
     @RequestMapping(path = &quot;&quot;, method = RequestMethod.POST)
     public void add(@RequestBody InventoryForm inventoryForm) throws ApiException {
-<span class="nc" id="L36">        ProductPojo productPojo= productService.getFromBarcode(inventoryForm.getBarcode());</span>
-<span class="nc" id="L37">        InventoryPojo inventoryPojo= DataConversionUtil.convert(inventoryForm,productPojo);</span>
-<span class="nc" id="L38">        inventoryService.add(inventoryPojo);</span>
-<span class="nc" id="L39">    }</span>
+<span class="nc" id="L37">    	inventoryForm.setBarcode(inventoryForm.getBarcode().toLowerCase().trim());</span>
+
+    	
+<span class="nc" id="L40">        ProductPojo productPojo= productService.getFromBarcode(inventoryForm.getBarcode());</span>
+<span class="nc" id="L41">        InventoryPojo inventoryPojo= DataConversionUtil.convert(inventoryForm,productPojo);</span>
+<span class="nc" id="L42">        inventoryService.add(inventoryPojo);</span>
+<span class="nc" id="L43">    }</span>
 
     @ApiOperation(value = &quot;Adds list of inventories&quot;)
     @RequestMapping(path = &quot;/list&quot;, method = RequestMethod.POST)
     public void add(@RequestBody List&lt;InventoryForm&gt; inventoryFormList) throws ApiException {
-<span class="nc" id="L44">        List&lt;InventoryPojo&gt; inventoryPojoList=new ArrayList&lt;&gt;();</span>
-<span class="nc bnc" id="L45" title="All 2 branches missed.">        if(inventoryFormList.size()==0) {</span>
-<span class="nc" id="L46">	    	 throw new ApiException(&quot;List size cannot be zero&quot;);</span>
+<span class="nc" id="L48">        List&lt;InventoryPojo&gt; inventoryPojoList=new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L49" title="All 2 branches missed.">        if(inventoryFormList.size()==0) {</span>
+<span class="nc" id="L50">	    	 throw new ApiException(&quot;List size cannot be zero&quot;);</span>
 	     }
-<span class="nc" id="L48">        productService.checkBarcodeExixtsOrNor(inventoryFormList);</span>
-<span class="nc bnc" id="L49" title="All 2 branches missed.">        for(InventoryForm inventoryForm :inventoryFormList) {</span>
-<span class="nc" id="L50">            ProductPojo productPojo= productService.getFromBarcode(inventoryForm.getBarcode());</span>
-<span class="nc" id="L51">            InventoryPojo inventoryPojo= DataConversionUtil.convert(inventoryForm,productPojo);</span>
-<span class="nc" id="L52">            inventoryPojoList.add(inventoryPojo);</span>
-<span class="nc" id="L53">        }</span>
-<span class="nc" id="L54">        inventoryService.addList(inventoryPojoList);</span>
-<span class="nc" id="L55">    }</span>
+<span class="nc" id="L52">        productService.checkBarcodeExixtsOrNor(inventoryFormList);</span>
+<span class="nc bnc" id="L53" title="All 2 branches missed.">        for(InventoryForm inventoryForm :inventoryFormList) {</span>
+<span class="nc" id="L54">            ProductPojo productPojo= productService.getFromBarcode(inventoryForm.getBarcode());</span>
+<span class="nc" id="L55">            InventoryPojo inventoryPojo= DataConversionUtil.convert(inventoryForm,productPojo);</span>
+<span class="nc" id="L56">            inventoryPojoList.add(inventoryPojo);</span>
+<span class="nc" id="L57">        }</span>
+<span class="nc" id="L58">        inventoryService.addList(inventoryPojoList);</span>
+<span class="nc" id="L59">    }</span>
     //Retrieves a product by id
     @ApiOperation(value = &quot;Get inventory of product  by Id&quot;)
     @RequestMapping(path = &quot;/{id}&quot;, method = RequestMethod.GET)
     public InventoryData get(@PathVariable int id) throws ApiException {
-<span class="nc" id="L60">        InventoryPojo inventoryPojo = inventoryService.get(id);</span>
-<span class="nc" id="L61">        ProductPojo productPojo=productService.get(inventoryPojo.getProductId());</span>
-<span class="nc" id="L62">        return DataConversionUtil.convert(inventoryPojo,productPojo);</span>
+<span class="nc" id="L64">        InventoryPojo inventoryPojo = inventoryService.get(id);</span>
+<span class="nc" id="L65">        ProductPojo productPojo=productService.get(inventoryPojo.getProductId());</span>
+<span class="nc" id="L66">        return DataConversionUtil.convert(inventoryPojo,productPojo);</span>
     }
 
     //Retrieves the total list of products in the inventory
     @ApiOperation(value = &quot;Gets list of inventory&quot;)
     @RequestMapping(path = &quot;&quot;, method = RequestMethod.GET)
     public List&lt;InventoryData&gt; getAll() throws ApiException {
-<span class="nc" id="L69">        List&lt;InventoryPojo&gt; inventoryPojoList = inventoryService.getAll();</span>
-<span class="nc" id="L70">        List&lt;InventoryData&gt; inventoryDataList = new ArrayList&lt;&gt;();</span>
-<span class="nc bnc" id="L71" title="All 2 branches missed.">        for (InventoryPojo inventoryPojo : inventoryPojoList){</span>
-<span class="nc" id="L72">            ProductPojo productPojo=productService.get(inventoryPojo.getProductId());</span>
-<span class="nc" id="L73">            inventoryDataList.add(DataConversionUtil.convert(inventoryPojo,productPojo));</span>
-<span class="nc" id="L74">        }</span>
-<span class="nc" id="L75">        return inventoryDataList;</span>
+<span class="nc" id="L73">        List&lt;InventoryPojo&gt; inventoryPojoList = inventoryService.getAll();</span>
+<span class="nc" id="L74">        List&lt;InventoryData&gt; inventoryDataList = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L75" title="All 2 branches missed.">        for (InventoryPojo inventoryPojo : inventoryPojoList){</span>
+<span class="nc" id="L76">            ProductPojo productPojo=productService.get(inventoryPojo.getProductId());</span>
+<span class="nc" id="L77">            inventoryDataList.add(DataConversionUtil.convert(inventoryPojo,productPojo));</span>
+<span class="nc" id="L78">        }</span>
+<span class="nc" id="L79">        return inventoryDataList;</span>
     }
 
     //Updates an inventory of a product
     @ApiOperation(value = &quot;Updates an inventory&quot;)
     @RequestMapping(path = &quot;/{id}&quot;, method = RequestMethod.PUT)
     public void update(@PathVariable int id, @RequestBody InventoryForm inventoryForm) throws ApiException {
-<span class="nc" id="L82">        inventoryForm.setBarcode(inventoryForm.getBarcode().toLowerCase().trim());</span>
-<span class="nc" id="L83">        ProductPojo productPojo= productService.getFromBarcode(inventoryForm.getBarcode());</span>
-<span class="nc" id="L84">        InventoryPojo inventoryPojo= DataConversionUtil.convert(inventoryForm,productPojo);</span>
-<span class="nc" id="L85">        inventoryService.update(id, inventoryPojo);</span>
-<span class="nc" id="L86">    }</span>
+<span class="nc" id="L86">        inventoryForm.setBarcode(inventoryForm.getBarcode().toLowerCase().trim());</span>
+<span class="nc" id="L87">        ProductPojo productPojo= productService.getFromBarcode(inventoryForm.getBarcode());</span>
+<span class="nc" id="L88">        InventoryPojo inventoryPojo= DataConversionUtil.convert(inventoryForm,productPojo);</span>
+<span class="nc" id="L89">        inventoryService.update(id, inventoryPojo);</span>
+<span class="nc" id="L90">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

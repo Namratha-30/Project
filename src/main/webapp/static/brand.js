@@ -35,7 +35,9 @@ function addBrand(event){
     	   		toastr.options.closeButton=true;
                 toastr.options.timeOut=0;
     	   },
+    	    
     	      error: function(response){
+    	      
     				handleAjaxError(response);
     		 }
     	});
@@ -70,6 +72,7 @@ function updateBrand(event){
             toastr.options.closeButton=true;
             toastr.options.timeOut=0;
 	   },
+	    
 	error: function(response){
     				handleAjaxError(response);
     		 }
@@ -96,18 +99,55 @@ function validateBrand(json) {
 	json = JSON.parse(json);
 	if(isBlank(json.brand)) {
 	    
-	      toastr.error("Brand field must not be empty")
+	    toastr.options.closeButton=false;
+            toastr.options.timeOut=3000;
+            toastr.error("Brand field must not be empty");
+            toastr.options.closeButton=true;
+            toastr.options.timeOut=0;
 	     
            
 		return false;
 	}
 	if(isBlank(json.category)) {
-	 
-           toastr.error("Category field must not be empty")
+
+	    toastr.options.closeButton=false;
+            toastr.options.timeOut=3000;
+              toastr.error("Category field must not be empty")
+                              
+                toastr.options.closeButton=true;
+            toastr.options.timeOut=0;
+          
+             
+	
+		return false;
+	}
+	if(isfull(json.brand)){
+	 toastr.options.closeButton=false;
+            toastr.options.timeOut=3000;
+	        toastr.error("Maximum String length of Brand exceeded")
+                              
+                toastr.options.closeButton=true;
+            toastr.options.timeOut=0;
+          
+           
            
 	
 		return false;
 	}
+	if(isfull(json.category)){
+	        toastr.options.closeButton=false;
+            toastr.options.timeOut=3000;
+	        toastr.error("Maximum String length of Category exceeded")
+                              
+            toastr.options.closeButton=true;
+            toastr.options.timeOut=0;
+           
+	
+		return false;
+	}
+	
+	
+	
 	return true;
 }
 // FILE UPLOAD METHODS
@@ -151,9 +191,16 @@ function uploadRows(){
                                 toastr.options.timeOut=0;
     	   		},
     	   error: function(response){
+    	   
     	   		row.error=response.responseText
-                console.log(response);
+                
+                 toastr.options.closeButton=false;
+                 toastr.options.timeOut=3000;
                 toastr.error("File cannot be uploaded: "+JSON.parse(response.responseText).message);
+                              
+                 toastr.options.closeButton=true;
+                toastr.options.timeOut=0;
+                resetUploadDialog();
 
                 }
     	});
@@ -175,8 +222,8 @@ function displayBrandList(tabledata){
 		'querySet': tabledata,
 	
 		'page': 1,
-		'rows': 5,
-		'window': 5,
+		'rows': 8,
+		'window': 8,
 	}
 	
 	buildTable()
@@ -252,11 +299,11 @@ function displayBrandList(tabledata){
 	
 		for(let i in myList){
 			let e = myList[i];
-			var buttonHtml = ' <button class="btn btn-sm btn-primary" title="Edit brand" onclick="displayEditBrand(' + e.id + ')">Edit</button>';
+			var buttonHtml = ' <button class="btn btn-sm btn-primary"  title="Edit brand" onclick="displayEditBrand(' + e.id + ')">Edit </button>';
 			var row = '<tr>'
-			+ '<td>' + e.brand + '</td>'
-			+ '<td>'  + e.category + '</td>'
-			+ '<td>' + buttonHtml + '</td>'
+			+ '<td style:"padding-right:50px">' + e.brand + '</td>'
+			+ '<td style:"padding-right:50px">'  + e.category + '</td>'
+			+ '<td >' + buttonHtml + '</td>'
 			+ '</tr>';
 			$tbody.append(row);
 		}

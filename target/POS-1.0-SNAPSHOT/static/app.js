@@ -42,6 +42,11 @@ function ajaxQueryRecur(url, type, data, successFunction,recurFunction) {
 function isBlank(str) {
     return (!str || /^\s*$/.test(str));
 }
+function isfull(str) {
+    return (str.length>255);
+}
+
+
 
 function isInt(n) {
    return n % 1 === 0;
@@ -63,7 +68,12 @@ function toJson($form){
 function handleAjaxError(response){
     console.log(response.responseText);
 	var response = JSON.parse(response.responseText);
-    toastr.error(response.message);
+	        toastr.options.closeButton=false;
+                 toastr.options.timeOut=3000;
+                  toastr.error(response.message);
+                              
+                 toastr.options.closeButton=true;
+                toastr.options.timeOut=0;
     //alert(response.message);
 }
 

@@ -1,5 +1,11 @@
 package pos.util;
 
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import pos.dao.ProductDao;
 import pos.model.data.BrandData;
 import pos.model.data.InventoryData;
 import pos.model.data.InventoryReportData;
@@ -11,18 +17,20 @@ import pos.model.form.BrandForm;
 import pos.model.form.InventoryForm;
 import pos.model.form.OrderItemForm;
 import pos.model.form.ProductForm;
-import pos.model.xml.*;
-import pos.pojo.*;
+import pos.model.xml.InventoryXmlList;
+import pos.model.xml.OrderData;
+import pos.model.xml.OrderInvoiceXmlList;
+import pos.model.xml.SaleXmlList;
+import pos.pojo.BrandPojo;
+import pos.pojo.InventoryPojo;
+import pos.pojo.OrderItemPojo;
+import pos.pojo.OrderPojo;
+import pos.pojo.ProductPojo;
 import pos.service.ApiException;
-
-
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 public class DataConversionUtil {
 
+	
     //convert brand form into brand pojo
     public static BrandPojo convert(BrandForm brandForm) {
         BrandPojo brandPojo = new BrandPojo();
@@ -51,6 +59,7 @@ public class DataConversionUtil {
     //converts product form into product pojo
     public static ProductPojo convert(ProductForm productForm, BrandPojo brandPojo) throws ApiException {
         ProductPojo productPojo = new ProductPojo();
+        
         productPojo.setBarcode(productForm.getBarcode());
         productPojo.setName(productForm.getName());
         productPojo.setMrp(productForm.getMrp());
@@ -83,6 +92,7 @@ public class DataConversionUtil {
         InventoryData inventoryData =new InventoryData();
         inventoryData.setId(inventoryPojo.getId());
         inventoryData.setQuantity(inventoryPojo.getQuantity());
+        
         inventoryData.setBarcode(productPojo.getBarcode());
         return inventoryData;
     }
@@ -92,6 +102,11 @@ public class DataConversionUtil {
                                                             OrderItemForm[] orderItemForms) throws ApiException {
         List<OrderItemPojo> orderItemPojoList = new ArrayList<>();
         for (OrderItemForm orderItemForm : orderItemForms) {
+        
+            orderItemForm.setBarcode(orderItemForm.getBarcode().toLowerCase().trim());
+            if(orderItemForm.getBarcode().length()>2147483647) {
+            	throw new ApiException("Maximum String length of Barcode exceeded");
+            }
             orderItemPojoList.add(convert(barcodeProduct.get(orderItemForm.getBarcode()), orderItemForm));
         }
         return orderItemPojoList;
@@ -150,9 +165,9 @@ public class DataConversionUtil {
             SaleReportData sales = new SaleReportData();
         //    sales.setBrand(brand.getBrand());
             sales.setCategory(category);
-            System.out.println(quantityPerBrandCategory.size());
+            //System.out.println(quantityPerBrandCategory.size());
             sales.setQuantity(quantityPerBrandCategory.get(category));
-            System.out.println(revenuePerBrandCategory.size());
+            //System.out.println(revenuePerBrandCategory.size());
             sales.setRevenue(revenuePerBrandCategory.get(category));
             sales_list.add(sales);
         }
