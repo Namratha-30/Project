@@ -45,6 +45,7 @@ public class OrderServiceTest extends AbstractUnitTest {
 
     }
 
+    
     // Testing adding of invalid order
     @Test
     public void testAddWrong() {

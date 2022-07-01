@@ -1,13 +1,13 @@
 package pos.dao;
 
-import org.springframework.stereotype.Repository;
-import pos.pojo.ProductPojo;
+import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
-import java.util.List;
+
+import org.springframework.stereotype.Repository;
+
+import pos.pojo.ProductPojo;
 
 //Repository for product
 @Repository
@@ -50,5 +50,6 @@ public class ProductDao extends AbstractDao{
         else
             return null;
     }
+    
     
 }

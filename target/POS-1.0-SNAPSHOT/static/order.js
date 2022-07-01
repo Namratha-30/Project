@@ -429,6 +429,7 @@ function displayOrderItem(data){
         				if(response.isInvoiceGenerated)
         				{
 						$('#addNewItem'+ data.orderId +'').attr('disabled',true) ;
+
 				toastr.options.closeButton=false;
                 toastr.options.timeOut=3000;
         		toastr.warning("Invoice is generated");
@@ -523,15 +524,6 @@ function createOrderItems(data,id,myList) {
 		table.append(row);
 			
 		
-	}
-	for(var i in myList){
-		var e = myList[i];
-		if(e.isInvoiceGenerated)
-		{
-		    
-			console.log($('#editOrder'+ e.id +'')) ;
-			$('#editOrder'+e.id+'').attr('disabled',true);
-		}
 	}
 	
 }

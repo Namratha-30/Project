@@ -68,12 +68,10 @@ function toJson($form){
 function handleAjaxError(response){
     console.log(response.responseText);
 	var response = JSON.parse(response.responseText);
-	        toastr.options.closeButton=false;
-                 toastr.options.timeOut=3000;
+	       
                   toastr.error(response.message);
                               
-                 toastr.options.closeButton=true;
-                toastr.options.timeOut=0;
+                
     //alert(response.message);
 }
 

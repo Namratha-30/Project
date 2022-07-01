@@ -1,22 +1,29 @@
 package pos.pojo;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+
 @Entity
 public class OrderItemPojo {
 
-    //Generate id starting from 100000
-    @Id
-    @GeneratedValue(strategy= GenerationType.SEQUENCE,generator = "orderItemIdSequence")
-    @SequenceGenerator(name = "orderItemIdSequence",initialValue = 100000, allocationSize = 1, sequenceName = "orderItemId")
-    private Integer id;
-    private Integer quantity;
-    
-    private Double sp;
-    private Integer orderId;
-    
-    private Integer ProductId;
+	// Generate id starting from 100000
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "orderItemIdSequence")
+	@SequenceGenerator(name = "orderItemIdSequence", initialValue = 100000, allocationSize = 1, sequenceName = "orderItemId")
+	private Integer id;
+	@Column(nullable = false)
+	private Integer quantity;
+	@Column(nullable = false)
+	private Double sp;
+	private Integer orderId;
 
-    public Integer getId() {
+	private Integer ProductId;
+
+	public Integer getId() {
 		return id;
 	}
 
@@ -57,7 +64,7 @@ public class OrderItemPojo {
 	}
 
 	public Double getRevenue() {
-        return quantity*sp;
-    }
+		return quantity * sp;
+	}
 
 }

@@ -40,6 +40,7 @@
 									xsl:use-attribute-sets="tableBorder">
 									<fo:block font-weight="bold">Quantity</fo:block>
 								</fo:table-cell>
+								
 							</fo:table-header>
 							<fo:table-body>
 								<xsl:apply-templates select="inventory_item" />
@@ -68,6 +69,7 @@
 					<xsl:value-of select="quantity" />
 				</fo:block>
 			</fo:table-cell>
+			
 		</fo:table-row>
 	</xsl:template>
 </xsl:stylesheet>

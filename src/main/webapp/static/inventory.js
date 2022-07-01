@@ -99,43 +99,33 @@ function validateInventoryUpload(arr) {
 	for(var i in arr){
 	var json=arr[i];
 	    if(isBlank(json.barcode)) {
-	              toastr.options.closeButton=false;
-            toastr.options.timeOut=3000;
+	             
         		toastr.error("Barcode field must not be empty");
-            toastr.options.closeButton=true;
-            toastr.options.timeOut=0;
+            
         		return false;
         	}
         	 if(isfull(json.barcode)) {
-        	  toastr.options.closeButton=false;
-            toastr.options.timeOut=3000;
+        	
         		toastr.error("Maximum String value of Barcode exceeded");
-            toastr.options.closeButton=true;
-            toastr.options.timeOut=0;
+           
         		return false;
         	}
         	if(isBlank(json.quantity)) {
-        	     toastr.options.closeButton=false;
-            toastr.options.timeOut=3000;
+        	    
         		toastr.error("Quantity field must not be empty");
-            toastr.options.closeButton=true;
-            toastr.options.timeOut=0;
+            
         		return false;
         	}
         	else if(isNaN(parseInt(json.quantity)) || !isInt(json.quantity)){
-        	    toastr.options.closeButton=false;
-                toastr.options.timeOut=3000;
+        	   
         	    toastr.error("Quantity field: "+ json.quantity+" must be an integer value");
-                toastr.options.closeButton=true;
-                toastr.options.timeOut=0;
+               
                         		return false;
         	}
         	if(parseInt(json.quantity)<=0){
-        	toastr.options.closeButton=false;
-                toastr.options.timeOut=3000;
+        	
             	toastr.error("Quantity must be positive");
-                toastr.options.closeButton=true;
-                toastr.options.timeOut=0;
+                
                 return false;
             	}
            
@@ -147,36 +137,28 @@ function validateInventoryUpload(arr) {
 function validateInventory(json) {
 	json = JSON.parse(json);
 	if(isBlank(json.barcode)) {
-	toastr.options.closeButton=false;
-                toastr.options.timeOut=3000;
+	
 		toastr.error("Barcode field must not be empty");
-                toastr.options.closeButton=true;
-                toastr.options.timeOut=0;
+               
 		return false;
 	}
 	if(isBlank(json.quantity)) {
-	           toastr.options.closeButton=false;
-                toastr.options.timeOut=3000;
+	          
             		toastr.error("Quantity field must not be empty");
-                toastr.options.closeButton=true;
-                toastr.options.timeOut=0;
+                
             		return false;
             	}
             	else if(isNaN(parseInt(json.quantity)) || !isInt(json.quantity)){
-            	   toastr.options.closeButton=false;
-                toastr.options.timeOut=3000;
+            	   
             	    toastr.error("Quantity field: "+ json.quantity+" must be an integer value");
-                toastr.options.closeButton=true;
-                toastr.options.timeOut=0;
+               
                             		return false;
             	}
 
 	if(parseInt(json.quantity)<=0){
-	 toastr.options.closeButton=false;
-                toastr.options.timeOut=3000;
+	 
     	toastr.error("Quantity must be positive");
-                toastr.options.closeButton=true;
-                toastr.options.timeOut=0;
+               
         return false;
     	}
 	return true;
@@ -226,11 +208,9 @@ function uploadRows(){
         	   },
         	   error: function(response){
         	   		console.log(response);
-        	   		toastr.options.closeButton=false;
-                toastr.options.timeOut=3000;
+        	   		
                     toastr.error("File cannot be uploaded: "+JSON.parse(response.responseText).message);
-                toastr.options.closeButton=true;
-                toastr.options.timeOut=0;
+               
                     resetUploadDialog();
         	   }
         	});

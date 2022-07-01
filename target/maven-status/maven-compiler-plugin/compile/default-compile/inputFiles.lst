@@ -15,10 +15,13 @@
 /home/dulamsainn/Downloads/eclipse/Pos/src/main/java/pos/dao/OrderDao.java
 /home/dulamsainn/Downloads/eclipse/Pos/src/main/java/pos/dao/OrderItemDao.java
 /home/dulamsainn/Downloads/eclipse/Pos/src/main/java/pos/model/form/ReportFilter.java
+/home/dulamsainn/Downloads/eclipse/Pos/src/main/java/pos/dto/OrderDto.java
+/home/dulamsainn/Downloads/eclipse/Pos/src/main/java/pos/dto/ProductDto.java
 /home/dulamsainn/Downloads/eclipse/Pos/src/main/java/pos/util/IOUtil.java
 /home/dulamsainn/Downloads/eclipse/Pos/src/main/java/pos/model/data/InventoryReportData.java
 /home/dulamsainn/Downloads/eclipse/Pos/src/main/java/pos/dao/InventoryDao.java
 /home/dulamsainn/Downloads/eclipse/Pos/src/main/java/pos/model/xml/OrderData.java
+/home/dulamsainn/Downloads/eclipse/Pos/src/main/java/pos/dto/InventoryDto.java
 /home/dulamsainn/Downloads/eclipse/Pos/src/main/java/pos/spring/SpringConfig.java
 /home/dulamsainn/Downloads/eclipse/Pos/src/main/java/pos/model/xml/SaleXmlList.java
 /home/dulamsainn/Downloads/eclipse/Pos/src/main/java/pos/spring/DbConfig.java
@@ -28,6 +31,7 @@
 /home/dulamsainn/Downloads/eclipse/Pos/src/main/java/pos/dao/AbstractDao.java
 /home/dulamsainn/Downloads/eclipse/Pos/src/main/java/pos/service/OrderService.java
 /home/dulamsainn/Downloads/eclipse/Pos/src/main/java/pos/controller/AbstractUiController.java
+/home/dulamsainn/Downloads/eclipse/Pos/src/main/java/pos/dto/BrandDto.java
 /home/dulamsainn/Downloads/eclipse/Pos/src/main/java/pos/pojo/ProductPojo.java
 /home/dulamsainn/Downloads/eclipse/Pos/src/main/java/pos/dao/BrandDao.java
 /home/dulamsainn/Downloads/eclipse/Pos/src/main/java/pos/spring/ControllerConfig.java

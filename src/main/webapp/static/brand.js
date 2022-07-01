@@ -99,48 +99,38 @@ function validateBrand(json) {
 	json = JSON.parse(json);
 	if(isBlank(json.brand)) {
 	    
-	    toastr.options.closeButton=false;
-            toastr.options.timeOut=3000;
+	    
             toastr.error("Brand field must not be empty");
-            toastr.options.closeButton=true;
-            toastr.options.timeOut=0;
+            
 	     
            
 		return false;
 	}
 	if(isBlank(json.category)) {
 
-	    toastr.options.closeButton=false;
-            toastr.options.timeOut=3000;
+	   
               toastr.error("Category field must not be empty")
                               
-                toastr.options.closeButton=true;
-            toastr.options.timeOut=0;
-          
+               
              
 	
 		return false;
 	}
 	if(isfull(json.brand)){
-	 toastr.options.closeButton=false;
-            toastr.options.timeOut=3000;
+	
 	        toastr.error("Maximum String length of Brand exceeded")
                               
-                toastr.options.closeButton=true;
-            toastr.options.timeOut=0;
-          
+               
            
            
 	
 		return false;
 	}
 	if(isfull(json.category)){
-	        toastr.options.closeButton=false;
-            toastr.options.timeOut=3000;
+	       
 	        toastr.error("Maximum String length of Category exceeded")
                               
-            toastr.options.closeButton=true;
-            toastr.options.timeOut=0;
+           
            
 	
 		return false;
@@ -194,12 +184,10 @@ function uploadRows(){
     	   
     	   		row.error=response.responseText
                 
-                 toastr.options.closeButton=false;
-                 toastr.options.timeOut=3000;
+                
                 toastr.error("File cannot be uploaded: "+JSON.parse(response.responseText).message);
                               
-                 toastr.options.closeButton=true;
-                toastr.options.timeOut=0;
+               
                 resetUploadDialog();
 
                 }

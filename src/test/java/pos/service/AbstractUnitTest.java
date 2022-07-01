@@ -1,16 +1,22 @@
 package pos.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.transaction.Transactional;
+
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.AnnotationConfigWebContextLoader;
 import org.springframework.test.context.web.WebAppConfiguration;
-import pos.pojo.*;
 
-import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.List;
+import pos.pojo.BrandPojo;
+import pos.pojo.InventoryPojo;
+import pos.pojo.OrderItemPojo;
+import pos.pojo.OrderPojo;
+import pos.pojo.ProductPojo;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = QaConfig.class, loader = AnnotationConfigWebContextLoader.class)
@@ -37,6 +43,7 @@ public abstract class AbstractUnitTest {
 	    protected List<InventoryPojo> inventoryPojoList;
 	    protected List<OrderPojo> orderPojoList;
 	    protected List<OrderItemPojo> orderItemPojoList;
+	   
 	    
 	    //Declaring all the pojo and assiging values for testing
 	    protected void declare() throws ApiException {

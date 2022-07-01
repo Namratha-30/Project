@@ -1,18 +1,93 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <inventory_items>
     <inventory_item>
-        <brand>amul</brand>
-        <category>milk</category>
-        <quantity>21</quantity>
+        <brand>pantaloons</brand>
+        <category>dresses</category>
+        <quantity>44</quantity>
     </inventory_item>
     <inventory_item>
-        <brand>dairy</brand>
+        <brand>mazaa</brand>
+        <category>drink</category>
+        <quantity>24</quantity>
+    </inventory_item>
+    <inventory_item>
+        <brand>roush</brand>
+        <category>slip-ons</category>
+        <quantity>70</quantity>
+    </inventory_item>
+    <inventory_item>
+        <brand>u.s.polo</brand>
+        <category>casual shirts</category>
+        <quantity>42</quantity>
+    </inventory_item>
+    <inventory_item>
+        <brand>roadster</brand>
+        <category>sneakers</category>
+        <quantity>64</quantity>
+    </inventory_item>
+    <inventory_item>
+        <brand>lays</brand>
+        <category>chips</category>
+        <quantity>44</quantity>
+    </inventory_item>
+    <inventory_item>
+        <brand>sprite</brand>
+        <category>drink</category>
+        <quantity>23</quantity>
+    </inventory_item>
+    <inventory_item>
+        <brand>bingo</brand>
+        <category>chips</category>
+        <quantity>54</quantity>
+    </inventory_item>
+    <inventory_item>
+        <brand>kurkure</brand>
+        <category>chips</category>
+        <quantity>45</quantity>
+    </inventory_item>
+    <inventory_item>
+        <brand>wrong</brand>
+        <category>tshirts</category>
+        <quantity>22</quantity>
+    </inventory_item>
+    <inventory_item>
+        <brand>voyage</brand>
+        <category>shirts</category>
+        <quantity>18</quantity>
+    </inventory_item>
+    <inventory_item>
+        <brand>mactree</brand>
+        <category>loafers</category>
+        <quantity>33</quantity>
+    </inventory_item>
+    <inventory_item>
+        <brand>dress berry</brand>
+        <category>bucket bag</category>
+        <quantity>33</quantity>
+    </inventory_item>
+    <inventory_item>
+        <brand>lino perros</brand>
+        <category>sling bag</category>
+        <quantity>31</quantity>
+    </inventory_item>
+    <inventory_item>
+        <brand>kitkat</brand>
         <category>chocolate</category>
-        <quantity>14</quantity>
+        <quantity>70</quantity>
     </inventory_item>
     <inventory_item>
-        <brand>amul</brand>
-        <category>milk</category>
-        <quantity>13</quantity>
+        <brand>thumbsup</brand>
+        <category>drink</category>
+        <quantity>56</quantity>
+    </inventory_item>
+    <inventory_item>
+        <brand>fogg</brand>
+        <category>perfume</category>
+        <quantity>20</quantity>
+    </inventory_item>
+    <inventory_item>
+        <brand>thumbsup</brand>
+        <category>drink</category>
+        <quantity>31</quantity>
     </inventory_item>
 </inventory_items>

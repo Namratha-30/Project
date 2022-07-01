@@ -1,96 +1,68 @@
 package pos.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
+import pos.dto.ProductDto;
 import pos.model.data.ProductData;
 import pos.model.form.ProductForm;
-import pos.pojo.BrandPojo;
-import pos.pojo.ProductPojo;
 import pos.service.ApiException;
-import pos.service.BrandService;
-import pos.service.ProductService;
-import pos.util.DataConversionUtil;
-
-
-import java.util.ArrayList;
-import java.util.List;
 
 //Controls the products page of the application
 @Api
 @RestController
 @RequestMapping(path = "/api/products")
-public class ProductController extends ExceptionHandler{
+public class ProductController extends ExceptionHandler {
 
-    @Autowired
-    private ProductService productService;
+	@Autowired
+	private ProductDto productDto;
 
-    @Autowired
-    private BrandService brandService;
+	// Adds a product
+	@ApiOperation(value = "Adds a product")
+	@RequestMapping(path = "", method = RequestMethod.POST)
+	public void add(@RequestBody ProductForm productForm) throws ApiException {
+		productDto.add(productForm);
+	}
 
-    //Adds a product
-    @ApiOperation(value = "Adds a product")
-    @RequestMapping(path = "", method = RequestMethod.POST)
-    public void add(@RequestBody ProductForm productForm) throws ApiException {
-    	
-        productForm.setBrand(productForm.getBrand().toLowerCase().trim());
-        productForm.setCategory(productForm.getCategory().toLowerCase().trim());
-       
-        BrandPojo brandPojo=brandService.getBrandPojo(productForm.getBrand(), productForm.getCategory());
-        productService.add(DataConversionUtil.convert(productForm,brandPojo));
-    }
+	@ApiOperation(value = "Adds list of products")
+	@RequestMapping(path = "/list", method = RequestMethod.POST)
+	public void add(@RequestBody List<ProductForm> productFormList) throws ApiException {
 
-    @ApiOperation(value = "Adds list of products")
-    @RequestMapping(path = "/list", method = RequestMethod.POST)
-    public void add(@RequestBody List<ProductForm> productFormList) throws ApiException {
-        List<ProductPojo> productPojoList=new ArrayList<>();
-        if(productFormList.size()==0) {
-	    	 throw new ApiException("List size cannot be zero");
-	     }
-        brandService.checkExixtsOrNot(productFormList);
-        for(ProductForm productForm:productFormList) {
-            productForm.setBrand(productForm.getBrand().toLowerCase().trim());
-            productForm.setCategory(productForm.getCategory().toLowerCase().trim());
-            BrandPojo brandPojo=brandService.getBrandPojo(productForm.getBrand(), productForm.getCategory());
-            productPojoList.add(DataConversionUtil.convert(productForm,brandPojo));
-        }
-        productService.addList(productPojoList);
-    }
+		productDto.addList(productFormList);
 
-    //Retrieves a product by productId
-    @ApiOperation(value = "Get a product by Id")
-    @RequestMapping(path = "/{id}", method = RequestMethod.GET)
-    public ProductData get(@PathVariable int id) throws ApiException {
-        ProductPojo productPojo = productService.get(id);
-        BrandPojo brandPojo= brandService.get(productPojo.getBrandCategory());
-        return DataConversionUtil.convert(productPojo,brandPojo);
-    }
+	}
 
-    //Retrieves list of all products
-    @ApiOperation(value = "Get list of all products")
-    @RequestMapping(path = "", method = RequestMethod.GET)
-    public List<ProductData> getAll() throws ApiException {
-        List<ProductPojo> productPojoList = productService.getAll();
-        List<ProductData> productDataList = new ArrayList<>();
-        for (ProductPojo productPojo : productPojoList){
-            BrandPojo brandPojo= brandService.get(productPojo.getBrandCategory());
-            productDataList.add(DataConversionUtil.convert(productPojo,brandPojo));
-        }
-        return productDataList;
-    }
+	// Retrieves a product by productId
+	@ApiOperation(value = "Get a product by Id")
+	@RequestMapping(path = "/{id}", method = RequestMethod.GET)
+	public ProductData get(@PathVariable int id) throws ApiException {
+		return productDto.get(id);
 
-    //Updates a product
-    @ApiOperation(value = "Updates a product")
-    @RequestMapping(path = "/{id}", method = RequestMethod.PUT)
-    public void update(@PathVariable int id, @RequestBody ProductForm productForm) throws ApiException {
-        ProductPojo productPojo= productService.get(id);
-        productForm.setBrand(brandService.get(productPojo.getBrandCategory()).getBrand());
-        productForm.setCategory(brandService.get(productPojo.getBrandCategory()).getCategory());
-        
-        BrandPojo brandPojo=brandService.getBrandPojo(productForm.getBrand(), productForm.getCategory());
-        productService.update(id, DataConversionUtil.convert(productForm,brandPojo));
-    }
-    
+	}
+
+	// Retrieves list of all products
+	@ApiOperation(value = "Get list of all products")
+	@RequestMapping(path = "", method = RequestMethod.GET)
+	public List<ProductData> getAll() throws ApiException {
+
+		return productDto.getAll();
+
+	}
+
+	// Updates a product
+	@ApiOperation(value = "Updates a product")
+	@RequestMapping(path = "/{id}", method = RequestMethod.PUT)
+	public void update(@PathVariable int id, @RequestBody ProductForm productForm) throws ApiException {
+		productDto.update(id, productForm);
+
+	}
+
 }

@@ -1,4 +1,5 @@
 pos/dao/OrderDao.class
+pos/dto/BrandDto.class
 pos/controller/ExceptionHandler.class
 pos/service/ApiException.class
 pos/spring/ControllerConfig.class
@@ -27,9 +28,11 @@ pos/dao/OrderItemDao.class
 pos/service/InventoryService.class
 pos/controller/InventoryController.class
 pos/model/data/InventoryReportData.class
+pos/dto/InventoryDto.class
 pos/model/xml/InventoryXmlList.class
 pos/util/IOUtil.class
 pos/model/xml/OrderData.class
+pos/dto/ProductDto.class
 pos/model/form/ReportFilter.class
 pos/spring/DbConfig.class
 pos/model/data/AboutAppData.class
@@ -50,6 +53,7 @@ pos/model/form/BrandForm.class
 pos/controller/ReportController.class
 pos/controller/AbstractUiController.class
 pos/model/data/InfoData.class
+pos/dto/OrderDto.class
 pos/model/form/InventoryForm.class
 pos/pojo/BrandPojo.class
 pos/model/data/InventoryData.class

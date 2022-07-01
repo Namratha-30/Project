@@ -12,58 +12,54 @@ import org.springframework.stereotype.Repository;
 import pos.pojo.BrandPojo;
 import pos.service.ApiException;
 
-
 //Repository for brand
 @Repository
-<span class="fc" id="L18">public class BrandDao extends AbstractDao{</span>
+<span class="fc" id="L17">public class BrandDao extends AbstractDao {</span>
 
-	
-<span class="fc" id="L21">    private static String deleteById = &quot;delete from BrandPojo p where id=:id&quot;;</span>
+	// private static String deleteById = &quot;delete from BrandPojo p where id=:id&quot;;
 
-    //Insert into table
-    @Transactional
-    public void insert(BrandPojo brandPojo){
-<span class="fc" id="L26">        em().persist(brandPojo);</span>
-<span class="fc" id="L27">    }</span>
+	// Insert into table
+	@Transactional
+	public void insert(BrandPojo brandPojo) {
+<span class="fc" id="L24">		em().persist(brandPojo);</span>
+<span class="fc" id="L25">	}</span>
 
-    //Retrieve a brand pojo
-    @Transactional
-    public BrandPojo select(int id){
-<span class="fc" id="L32">        return em().find(BrandPojo.class,id);</span>
-    }
+	// Retrieve a brand pojo
+	@Transactional
+	public BrandPojo select(int id) {
+<span class="fc" id="L30">		return em().find(BrandPojo.class, id);</span>
+	}
 
-    //Retrieve all brand pojo
-    @Transactional
-    public List&lt;BrandPojo&gt; selectAll() throws ApiException {
-<span class="fc" id="L38">        String selectAll = &quot;select p from BrandPojo p&quot;;</span>
-        try
-        {
-<span class="fc" id="L41">        TypedQuery&lt;BrandPojo&gt; query = getQuery(selectAll,  BrandPojo.class);</span>
-<span class="fc" id="L42">        return query.getResultList();</span>
-        }
-<span class="nc" id="L44">        catch(NoResultException e){</span>
+	// Retrieve all brand pojo
+	@Transactional
+	public List&lt;BrandPojo&gt; selectAll() throws ApiException {
+<span class="fc" id="L36">		String selectAll = &quot;select p from BrandPojo p&quot;;</span>
+		try {
+<span class="fc" id="L38">			TypedQuery&lt;BrandPojo&gt; query = getQuery(selectAll, BrandPojo.class);</span>
+<span class="fc" id="L39">			return query.getResultList();</span>
+<span class="nc" id="L40">		} catch (NoResultException e) {</span>
 //        	Log.debug(&quot;No data found&quot;);
-<span class="nc" id="L46">        	throw new ApiException(e.getMessage());</span>
-        }
+<span class="nc" id="L42">			throw new ApiException(e.getMessage());</span>
+		}
 
-        
-    }
+	}
 
-    //Update a brand with given brandId
-    @Transactional
-    public void update(int id,BrandPojo brandPojo) {
+	// Update a brand with given brandId
+	@Transactional
+	public void update(int id, BrandPojo brandPojo) {
 
-<span class="fc" id="L56">    }</span>
+<span class="fc" id="L51">	}</span>
 
-    @Transactional
-    //Retrieve brand pojo based in brand and category
-    public List&lt;BrandPojo&gt; selectByBrandAndCategory(String brand, String category){
-<span class="fc" id="L61">        String selectBrandCategory = &quot;select p from BrandPojo p where brand=:brand and category=:category&quot;;</span>
-<span class="fc" id="L62">        TypedQuery&lt;BrandPojo&gt; query = getQuery(selectBrandCategory, BrandPojo.class);</span>
-<span class="fc" id="L63">        query.setParameter(&quot;brand&quot;,brand);</span>
-<span class="fc" id="L64">        query.setParameter(&quot;category&quot;,category);</span>
-<span class="fc" id="L65">        return query.getResultList();</span>
-    }
-    
+	@Transactional
+	// Retrieve brand pojo based in brand and category
+	// TODO change return value to singleResult()
+	public List&lt;BrandPojo&gt; selectByBrandAndCategory(String brand, String category) {
+<span class="fc" id="L57">		String selectBrandCategory = &quot;select p from BrandPojo p where brand=:brand and category=:category&quot;;</span>
+<span class="fc" id="L58">		TypedQuery&lt;BrandPojo&gt; query = getQuery(selectBrandCategory, BrandPojo.class);</span>
+<span class="fc" id="L59">		query.setParameter(&quot;brand&quot;, brand);</span>
+<span class="fc" id="L60">		query.setParameter(&quot;category&quot;, category);</span>
+<span class="fc" id="L61">		return query.getResultList();</span>
+	}
+
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

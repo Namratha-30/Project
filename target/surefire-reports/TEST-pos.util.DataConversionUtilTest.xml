@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="14" failures="0" name="pos.util.DataConversionUtilTest" time="0.72" errors="0" skipped="0">
+<testsuite tests="14" failures="0" name="pos.util.DataConversionUtilTest" time="0.709" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64"/>
@@ -61,18 +61,18 @@
     <property name="sun.desktop" value="gnome"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="pos.util.DataConversionUtilTest" name="testOrderItemstoInvoice" time="0.403"/>
-  <testcase classname="pos.util.DataConversionUtilTest" name="testOrderItemsFormtoPojo" time="0.027"/>
-  <testcase classname="pos.util.DataConversionUtilTest" name="testConvertProductPojoToData" time="0.025"/>
-  <testcase classname="pos.util.DataConversionUtilTest" name="testConvertInventoryFormtoPojo" time="0.024"/>
+  <testcase classname="pos.util.DataConversionUtilTest" name="testOrderItemstoInvoice" time="0.419"/>
+  <testcase classname="pos.util.DataConversionUtilTest" name="testOrderItemsFormtoPojo" time="0.035"/>
+  <testcase classname="pos.util.DataConversionUtilTest" name="testConvertProductPojoToData" time="0.023"/>
+  <testcase classname="pos.util.DataConversionUtilTest" name="testConvertInventoryFormtoPojo" time="0.022"/>
   <testcase classname="pos.util.DataConversionUtilTest" name="testConvertProductFormToPojo" time="0.026"/>
-  <testcase classname="pos.util.DataConversionUtilTest" name="testConvertInventoryReportList" time="0.025"/>
-  <testcase classname="pos.util.DataConversionUtilTest" name="testConverListBrandPojoToData" time="0.021"/>
-  <testcase classname="pos.util.DataConversionUtilTest" name="testConvertBranFormTopojo" time="0.022"/>
-  <testcase classname="pos.util.DataConversionUtilTest" name="testListBrandPojoToData" time="0.025"/>
+  <testcase classname="pos.util.DataConversionUtilTest" name="testConvertInventoryReportList" time="0.019"/>
+  <testcase classname="pos.util.DataConversionUtilTest" name="testConverListBrandPojoToData" time="0.022"/>
+  <testcase classname="pos.util.DataConversionUtilTest" name="testConvertBranFormTopojo" time="0.024"/>
+  <testcase classname="pos.util.DataConversionUtilTest" name="testListBrandPojoToData" time="0.024"/>
   <testcase classname="pos.util.DataConversionUtilTest" name="testConvertOrderItemPojoToData" time="0.02"/>
-  <testcase classname="pos.util.DataConversionUtilTest" name="testConvertInventoryPojoToData" time="0.022"/>
-  <testcase classname="pos.util.DataConversionUtilTest" name="testConvertOrderItemFormToOrderIemPojo" time="0.028"/>
-  <testcase classname="pos.util.DataConversionUtilTest" name="testConvertSalesList" time="0.026"/>
-  <testcase classname="pos.util.DataConversionUtilTest" name="testConvertOrderPojoToData" time="0.026"/>
+  <testcase classname="pos.util.DataConversionUtilTest" name="testConvertInventoryPojoToData" time="0.02"/>
+  <testcase classname="pos.util.DataConversionUtilTest" name="testConvertOrderItemFormToOrderIemPojo" time="0.019"/>
+  <testcase classname="pos.util.DataConversionUtilTest" name="testConvertSalesList" time="0.018"/>
+  <testcase classname="pos.util.DataConversionUtilTest" name="testConvertOrderPojoToData" time="0.018"/>
 </testsuite>

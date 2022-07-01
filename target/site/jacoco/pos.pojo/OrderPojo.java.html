@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>OrderPojo.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">pos</a> &gt; <a href="index.source.html" class="el_package">pos.pojo</a> &gt; <span class="el_source">OrderPojo.java</span></div><h1>OrderPojo.java</h1><pre class="source lang-java linenums">package pos.pojo;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+
 @Entity
-<span class="fc" id="L7">public class OrderPojo {</span>
+<span class="fc" id="L12">public class OrderPojo {</span>
 
     //Generate id from 1000
     @Id
@@ -12,24 +17,24 @@ import java.time.LocalDateTime;
     @SequenceGenerator(name = &quot;orderIdSequence&quot;,initialValue = 1000, allocationSize = 1, sequenceName = &quot;orderId&quot;)
     private Integer id;
     public Integer getId() {
-<span class="fc" id="L15">		return id;</span>
+<span class="fc" id="L20">		return id;</span>
 	}
 	public void setId(Integer id) {
-<span class="fc" id="L18">		this.id = id;</span>
-<span class="fc" id="L19">	}</span>
+<span class="fc" id="L23">		this.id = id;</span>
+<span class="fc" id="L24">	}</span>
 	public LocalDateTime getDatetime() {
-<span class="fc" id="L21">		return datetime;</span>
+<span class="fc" id="L26">		return datetime;</span>
 	}
 	public void setDatetime(LocalDateTime datetime) {
-<span class="fc" id="L24">		this.datetime = datetime;</span>
-<span class="fc" id="L25">	}</span>
+<span class="fc" id="L29">		this.datetime = datetime;</span>
+<span class="fc" id="L30">	}</span>
 	public Boolean getIsInvoiceGenerated() {
-<span class="fc" id="L27">		System.out.println(isInvoiceGenerated);</span>
-<span class="fc" id="L28">		return isInvoiceGenerated;</span>
+<span class="fc" id="L32">		System.out.println(isInvoiceGenerated);</span>
+<span class="fc" id="L33">		return isInvoiceGenerated;</span>
 	}
 	public void setIsInvoiceGenerated(Boolean isInvoiceGenerated) {
-<span class="fc" id="L31">		this.isInvoiceGenerated = isInvoiceGenerated;</span>
-<span class="fc" id="L32">	}</span>
+<span class="fc" id="L36">		this.isInvoiceGenerated = isInvoiceGenerated;</span>
+<span class="fc" id="L37">	}</span>
 	private LocalDateTime datetime;
     private Boolean isInvoiceGenerated;
 }

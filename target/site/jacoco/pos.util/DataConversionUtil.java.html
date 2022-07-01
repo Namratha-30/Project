@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import pos.dao.ProductDao;
 import pos.model.data.BrandData;
 import pos.model.data.InventoryData;
 import pos.model.data.InventoryReportData;
@@ -28,16 +27,17 @@ import pos.pojo.OrderPojo;
 import pos.pojo.ProductPojo;
 import pos.service.ApiException;
 
-<span class="nc" id="L31">public class DataConversionUtil {</span>
+<span class="nc" id="L30">public class DataConversionUtil {</span>
 
 	
     //convert brand form into brand pojo
     public static BrandPojo convert(BrandForm brandForm) {
-<span class="fc" id="L36">        BrandPojo brandPojo = new BrandPojo();</span>
-<span class="fc" id="L37">        brandPojo.setBrand(brandForm.getBrand());</span>
-<span class="fc" id="L38">        brandPojo.setCategory(brandForm.getCategory());</span>
-<span class="fc" id="L39">        return brandPojo;</span>
+<span class="fc" id="L35">        BrandPojo brandPojo = new BrandPojo();</span>
+<span class="fc" id="L36">        brandPojo.setBrand(brandForm.getBrand());</span>
+<span class="fc" id="L37">        brandPojo.setCategory(brandForm.getCategory());</span>
+<span class="fc" id="L38">        return brandPojo;</span>
     }
+    
 
     //Converts a brand pojo into brand data
     public static BrandData convert(BrandPojo brandPojo) {

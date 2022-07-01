@@ -1,15 +1,16 @@
 package pos.model.data;
 
-import lombok.Data;
-
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+import lombok.Data;
 
 @Data
 public class InfoData {
 
-    private String message;
+	private String message;
 
-    public String getMessage() {
+	public String getMessage() {
 		return message;
 	}
 
@@ -18,6 +19,6 @@ public class InfoData {
 	}
 
 	public InfoData() {
-        message = "Activity time: " + LocalDateTime.now().toString();
-    }
+		message = "Activity time: " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+	}
 }

@@ -14,60 +14,69 @@ import pos.pojo.BrandPojo;
 
 public class BrandServiceTest extends AbstractUnitTest {
 
-	
-	  @Before public void Declaration() throws ApiException { declare(); }
-	 
+	@Before
+	public void Declaration() throws ApiException {
+		declare();
+	}
 
-	// testing normalize
+	// testing normalize function to give lower case and trimmed values
 	@Test
 	public void testNormalize() throws ApiException {
 		BrandPojo brandpojo = new BrandPojo();
 		brandpojo.setBrand(" Amul  ");
 		brandpojo.setCategory(" SJND ");
-		brandService.normalize(brandpojo);
+		BrandService.normalize(brandpojo);
 
-		System.out.println(brandService.add());
 		assertEquals("amul", brandpojo.getBrand());
 		assertEquals("sjnd", brandpojo.getCategory());
 
 	}
 
+	// testings addList method from BrandService
 	@Test
 	public void testAddList() throws ApiException {
-		List<BrandPojo> bpojolist = new ArrayList<>();
-		BrandPojo bpojo = new BrandPojo();
-		bpojo.setBrand("sbf");
-		bpojo.setCategory("jhf");
-		bpojolist.add(bpojo);
-		brandService.addList(bpojolist);
-		BrandPojo brandpojo1 = brandService.get(bpojolist.get(0).getId());
-		assertEquals(bpojo.getBrand(), brandpojo1.getBrand());
-		assertEquals(bpojo.getCategory(), brandpojo1.getCategory());
+		List<BrandPojo> brandPojoList = new ArrayList<>();
+		BrandPojo brandPojo = new BrandPojo();
+		brandPojo.setBrand("amul");
+		brandPojo.setCategory("milk");
+		brandPojoList.add(brandPojo);
+
+		BrandPojo secondBrandPojo = new BrandPojo();
+		secondBrandPojo.setBrand("dairy");
+		secondBrandPojo.setCategory("chocolate");
+		brandPojoList.add(secondBrandPojo);
+
+		brandService.addList(brandPojoList);
+		BrandPojo resultBrandPojo = brandService.get(brandPojoList.get(0).getId());
+		BrandPojo resultOfSecondBrandPojo = brandService.get(brandPojoList.get(1).getId());
+		assertEquals(brandPojo.getBrand(), resultBrandPojo.getBrand());
+		assertEquals(brandPojo.getCategory(), resultBrandPojo.getCategory());
+		assertEquals(secondBrandPojo.getBrand(), resultOfSecondBrandPojo.getBrand());
 
 	}
 
-	// testing add
+	// testing add method from BrandService
 	@Test
 	public void testAdd() throws ApiException {
-		BrandPojo brandpojo = new BrandPojo();
-		brandpojo.setBrand(" nams      ");
-		brandpojo.setCategory("vhgv");
-		System.out.println(brandpojo.getBrand());
-		brandService.add(brandpojo);
-		BrandPojo brandpojo1 = brandService.get(brandpojo.getId());
-		assertEquals(brandpojo.getBrand(), brandpojo1.getBrand());
-		assertEquals(brandpojo.getCategory(), brandpojo1.getCategory());
+		BrandPojo brandPojo = new BrandPojo();
+		brandPojo.setBrand(" nams      ");
+		brandPojo.setCategory("vhgv");
+		brandService.add(brandPojo);
+		BrandPojo resultBrandPojo = brandService.get(brandPojo.getId());
+		assertEquals(brandPojo.getBrand(), resultBrandPojo.getBrand());
+		assertEquals(brandPojo.getCategory(), resultBrandPojo.getCategory());
 
 	}
 
+	// testing if null value of brand passed should get exception
 	@Test
-	public void testBrandCheck() throws ApiException {
-		BrandPojo pojo = new BrandPojo();
-		pojo.setBrand("");
-		pojo.setCategory("bajdb");
+	public void testIfNullBrandShouldGetException() throws ApiException {
+		BrandPojo brandPojo = new BrandPojo();
+		brandPojo.setBrand("");
+		brandPojo.setCategory("bajdb");
 
 		try {
-			brandService.check(pojo);
+			brandService.check(brandPojo);
 			fail("ApiException did not occur");
 		} catch (ApiException e) {
 			assertEquals(e.getMessage(), "Brand name cannot be empty");
@@ -75,110 +84,116 @@ public class BrandServiceTest extends AbstractUnitTest {
 
 	}
 
+	// testing if null value of category passed should get exception
 	@Test
-	public void testCategoryCheck() throws ApiException {
-		BrandPojo pojo = new BrandPojo();
-		pojo.setBrand("bajdb");
-		pojo.setCategory("");
+	public void testIfNullCategoryShouldGetException() throws ApiException {
+		BrandPojo brandPojo = new BrandPojo();
+		brandPojo.setBrand("bajdb");
+		brandPojo.setCategory("");
 
 		try {
-			brandService.check(pojo);
+			brandService.check(brandPojo);
 			fail("ApiException did not occur");
 		} catch (ApiException e) {
 			assertEquals(e.getMessage(), "Category name cannot be empty");
 		}
 	}
 
-	
-
+	// test if invalid id passed should give exception
 	@Test
-	public void testGetCheck() throws ApiException {
+	public void testIfInvalidIdShouldGetException() throws ApiException {
 
 		try {
-			
+
 			brandService.getCheck(-2);
-			
+
 			fail("ApiException did not occur");
 		} catch (ApiException e) {
-			assertEquals(e.getMessage(), "Brand with given ID: " + -2+" does not exist");
+			assertEquals(e.getMessage(), "Brand with given ID: " + -2 + " does not exist");
 		}
 
 	}
-	
-	//if given barcode already exists or not
-    @Test
-    public void testCheckExistsOrNot() throws ApiException{
-    	ProductForm pojo=new ProductForm();
-    	pojo.setName("product-z");
-    	pojo.setMrp(50.0);
-    	pojo.setBarcode("1");
-    	pojo.setBrandCategory(22);
-    	pojo.setBrand("brand-z");
-    	pojo.setCategory("category-z");
-        List<ProductForm> productformlist=new ArrayList<>();
-        productformlist.add(pojo);
-        try {
-        	brandService.checkExixtsOrNot(productformlist);
-        	fail("ApiException did not occur");
-		} catch (ApiException e) {
-			assertEquals(e.getMessage(), "The following brand and category combinations does not exists: {"+pojo.getBrand()+"="+pojo.getCategory()+"}");
-		}
-    	
-    	
-    }
-    
-    //testing if brand and category pair exists or not
-    @Test
-    public void testGetBrandPojo() {
-    	String brand="brand-z";
-    	String category="category-z";
-    	try {
-    	brandService.getBrandPojo(brand, category);
-    	fail("ApiException did not occur");
-		} catch (ApiException e) {
-			assertEquals(e.getMessage(), "The brand: " + brand + " and category: "+ category+" combination given does not exist");
-		}
-    	
-    }
-    
-    @Test
-    public void testUpdate() throws ApiException {
-    	
-    	BrandPojo brandpojo=new BrandPojo();
-    	brandpojo.setBrand("brand-0");
-    	brandpojo.setCategory("category-0");
-    	BrandPojo bpojo=brandPojoList.get(0);
-    	//System.out.println(bpojo.getId());
-    	brandService.update(bpojo.getId(), brandpojo);
-    	BrandPojo brandpojo1 = brandService.get(bpojo.getId());
-		assertEquals(brandpojo.getBrand(), brandpojo1.getBrand());
-		assertEquals(brandpojo.getCategory(), brandpojo1.getCategory());
-    	
-    }
-   //testing if brand and category already exists in check method
+
+	// if given barcode already exists or not
 	@Test
-	public void testCheckList() {
-		BrandPojo bpojo=brandPojoList.get(0);
+	public void testBarcodeCheckExistsOrNot() throws ApiException {
+		ProductForm productPojo = new ProductForm();
+		productPojo.setName("product-z");
+		productPojo.setMrp(50.0);
+		productPojo.setBarcode("1");
+		productPojo.setBrandCategory(22);
+		productPojo.setBrand("brand-z");
+		productPojo.setCategory("category-z");
+		List<ProductForm> productFormList = new ArrayList<>();
+		productFormList.add(productPojo);
 		try {
-			brandService.check(bpojo);
+			brandService.checkExixtsOrNot(productFormList);
 			fail("ApiException did not occur");
 		} catch (ApiException e) {
-			assertEquals(e.getMessage(), "Brand: "+bpojo.getBrand()+" and Category: " +bpojo.getCategory()+" already exist");
+			assertEquals(e.getMessage(), "The following brand and category combinations does not exists: {"
+					+ productPojo.getBrand() + "=" + productPojo.getCategory() + "}");
+		}
+
+	}
+
+	// testing if brand and category pair exists or not
+	@Test
+	public void testGetBrandPojo() {
+		String brand = "brand-z";
+		String category = "category-z";
+		try {
+			brandService.getBrandPojo(brand, category);
+			fail("ApiException did not occur");
+		} catch (ApiException e) {
+			assertEquals(e.getMessage(),
+					"The brand: " + brand + " and category: " + category + " combination given does not exist");
+		}
+
+	}
+
+	// testing update method from BrandService
+	@Test
+	public void testUpdate() throws ApiException {
+
+		BrandPojo brandPojo = new BrandPojo();
+		brandPojo.setBrand("brand-0");
+		brandPojo.setCategory("category-0");
+		BrandPojo existingBrandPojo = brandPojoList.get(0);
+		// System.out.println(bpojo.getId());
+		brandService.update(existingBrandPojo.getId(), brandPojo);
+		BrandPojo resultBrandPojo = brandService.get(existingBrandPojo.getId());
+		assertEquals(brandPojo.getBrand(), resultBrandPojo.getBrand());
+		assertEquals(brandPojo.getCategory(), resultBrandPojo.getCategory());
+
+	}
+
+	// testing if brand and category already exists
+	@Test
+	public void testBrandPojoExistsOrNot() {
+		BrandPojo brandPojo = brandPojoList.get(0);
+		try {
+			brandService.check(brandPojo);
+			fail("ApiException did not occur");
+		} catch (ApiException e) {
+			assertEquals(e.getMessage(),
+					"Brand: " + brandPojo.getBrand() + " and Category: " + brandPojo.getCategory() + " already exist");
 		}
 	}
-	
+
+	// checking if duplicates exists in given list
 	@Test
 	public void testCheckDuplicates() {
-		BrandPojo bpojo=brandPojoList.get(0);
-		BrandPojo bpojo1=brandPojoList.get(0);
-		List<BrandPojo> bpojolist=new ArrayList<>();
-		bpojolist.add(bpojo);
-		bpojolist.add(bpojo1);
+		BrandPojo brandPojo = brandPojoList.get(0);
+		BrandPojo duplicateBrandPojo = brandPojoList.get(0);
+		List<BrandPojo> brandPojoList = new ArrayList<>();
+		brandPojoList.add(brandPojo);
+		brandPojoList.add(duplicateBrandPojo);
 		try {
-			brandService.checkDuplicates(bpojolist);
+			brandService.checkDuplicates(brandPojoList);
 			fail("ApiException did not occur");
 		} catch (ApiException e) {
-			assertEquals(e.getMessage(), "Duplicate Items exists in File uploaded{"+bpojo.getBrand()+"="+bpojo.getCategory()+"}");
+			assertEquals(e.getMessage(), "Duplicate Items exists in File uploaded{" + brandPojo.getBrand() + "="
+					+ brandPojo.getCategory() + "}");
 		}
 	}
 
