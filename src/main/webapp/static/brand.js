@@ -71,7 +71,8 @@ function updateBrand(event){
             toastr.success("Brand updated successfully");
             toastr.options.closeButton=true;
             toastr.options.timeOut=0;
-	   },
+	   
+       },
 	    
 	error: function(response){
     				handleAjaxError(response);

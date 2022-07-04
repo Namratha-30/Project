@@ -1,8 +1,53 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <sales_items>
     <sales_item>
+        <category>slip-ons</category>
+        <quantity>6</quantity>
+        <revenue>3420.0</revenue>
+    </sales_item>
+    <sales_item>
+        <category>chips</category>
+        <quantity>12</quantity>
+        <revenue>272.0</revenue>
+    </sales_item>
+    <sales_item>
+        <category>sneakers</category>
+        <quantity>1</quantity>
+        <revenue>379.9</revenue>
+    </sales_item>
+    <sales_item>
+        <category>casual shirts</category>
+        <quantity>1</quantity>
+        <revenue>34.5</revenue>
+    </sales_item>
+    <sales_item>
+        <category>dresses</category>
+        <quantity>1</quantity>
+        <revenue>57.0</revenue>
+    </sales_item>
+    <sales_item>
+        <category>sling bag</category>
+        <quantity>3</quantity>
+        <revenue>90.0</revenue>
+    </sales_item>
+    <sales_item>
+        <category>bucket bag</category>
+        <quantity>2</quantity>
+        <revenue>68.0</revenue>
+    </sales_item>
+    <sales_item>
+        <category>perfume</category>
+        <quantity>10</quantity>
+        <revenue>20.0</revenue>
+    </sales_item>
+    <sales_item>
         <category>drink</category>
-        <quantity>11</quantity>
-        <revenue>236.0</revenue>
+        <quantity>15</quantity>
+        <revenue>2305.0</revenue>
+    </sales_item>
+    <sales_item>
+        <category>chocolate</category>
+        <quantity>2</quantity>
+        <revenue>216.0</revenue>
     </sales_item>
 </sales_items>

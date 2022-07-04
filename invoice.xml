@@ -1,11 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <items>
-    <order_id>1006</order_id>
-    <datetime>2022-07-01 11:38</datetime>
-    <total>20.0</total>
+    <order_id>1004</order_id>
+    <datetime>2022-07-01 11:26</datetime>
+    <total>3856.9</total>
     <item>
-        <name>fogg scent</name>
-        <mrp>2.0</mrp>
-        <quantity>10</quantity>
+        <name>roush slip-ons</name>
+        <mrp>570.0</mrp>
+        <quantity>6</quantity>
+    </item>
+    <item>
+        <name>kurta</name>
+        <mrp>57.0</mrp>
+        <quantity>1</quantity>
+    </item>
+    <item>
+        <name>raodster shoes</name>
+        <mrp>379.9</mrp>
+        <quantity>1</quantity>
     </item>
 </items>

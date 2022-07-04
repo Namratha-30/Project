@@ -227,7 +227,6 @@ function getOrderItems(id,myList) {
 	});
 }
 
-
 //UI DISPLAY METHODS
 
 function displayOrderItemListFrontend(data){

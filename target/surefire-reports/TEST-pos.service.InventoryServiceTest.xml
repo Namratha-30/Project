@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="13" failures="0" name="pos.service.InventoryServiceTest" time="0.222" errors="0" skipped="0">
+<testsuite tests="13" failures="0" name="pos.service.InventoryServiceTest" time="0.236" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64"/>
@@ -32,7 +32,7 @@
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.class.version" value="52.0"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
-    <property name="os.version" value="5.14.0-1042-oem"/>
+    <property name="os.version" value="5.14.0-1044-oem"/>
     <property name="library.jansi.path" value="/opt/apache-maven-3.8.5-bin/apache-maven-3.8.5/lib/jansi-native"/>
     <property name="user.home" value="/home/dulamsainn"/>
     <property name="user.timezone" value="Asia/Kolkata"/>
@@ -62,16 +62,16 @@
     <property name="sun.cpu.isalist" value=""/>
   </properties>
   <testcase classname="pos.service.InventoryServiceTest" name="testGetCheck" time="0.023"/>
-  <testcase classname="pos.service.InventoryServiceTest" name="testAddList" time="0.023"/>
-  <testcase classname="pos.service.InventoryServiceTest" name="testGetByIdNotExisting" time="0.017"/>
+  <testcase classname="pos.service.InventoryServiceTest" name="testAddList" time="0.024"/>
+  <testcase classname="pos.service.InventoryServiceTest" name="testGetByIdNotExisting" time="0.018"/>
   <testcase classname="pos.service.InventoryServiceTest" name="testAdd" time="0.02"/>
-  <testcase classname="pos.service.InventoryServiceTest" name="testCheck" time="0.017"/>
-  <testcase classname="pos.service.InventoryServiceTest" name="testGetFromProductId" time="0.017"/>
-  <testcase classname="pos.service.InventoryServiceTest" name="testGetBrandFromInventory" time="0.015"/>
-  <testcase classname="pos.service.InventoryServiceTest" name="testValidate" time="0.015"/>
-  <testcase classname="pos.service.InventoryServiceTest" name="testGetById" time="0.016"/>
-  <testcase classname="pos.service.InventoryServiceTest" name="testCheckIfExistsId" time="0.014"/>
-  <testcase classname="pos.service.InventoryServiceTest" name="testAddUpdate" time="0.015"/>
-  <testcase classname="pos.service.InventoryServiceTest" name="testGetByProductId" time="0.016"/>
-  <testcase classname="pos.service.InventoryServiceTest" name="testUpdate" time="0.014"/>
+  <testcase classname="pos.service.InventoryServiceTest" name="testCheck" time="0.016"/>
+  <testcase classname="pos.service.InventoryServiceTest" name="testGetFromProductId" time="0.018"/>
+  <testcase classname="pos.service.InventoryServiceTest" name="testGetBrandFromInventory" time="0.017"/>
+  <testcase classname="pos.service.InventoryServiceTest" name="testValidate" time="0.018"/>
+  <testcase classname="pos.service.InventoryServiceTest" name="testGetById" time="0.017"/>
+  <testcase classname="pos.service.InventoryServiceTest" name="testCheckIfExistsId" time="0.015"/>
+  <testcase classname="pos.service.InventoryServiceTest" name="testAddUpdate" time="0.016"/>
+  <testcase classname="pos.service.InventoryServiceTest" name="testGetByProductId" time="0.018"/>
+  <testcase classname="pos.service.InventoryServiceTest" name="testUpdate" time="0.016"/>
 </testsuite>

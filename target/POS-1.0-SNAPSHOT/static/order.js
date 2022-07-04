@@ -53,19 +53,15 @@ function addOrderItemToList(event) {
 			else{
 			
 			if(!inventoryMap[val]){
-			toastr.options.closeButton=false;
-                toastr.options.timeOut=3000;
+			
             					toastr.error("The given Barcode does not exists ");
-                toastr.options.closeButton=true;
-                toastr.options.timeOut=0;
+                
             					}
             	else
             	{
-            					toastr.options.closeButton=false;
-                toastr.options.timeOut=3000;
+            				
 				toastr.error("The product inventory is: " + inventoryMap[val] + " order cannot be placed more than that");
-                toastr.options.closeButton=true;
-                toastr.options.timeOut=0;
+               
             					}
 
 			}
@@ -79,18 +75,14 @@ function addOrderItemToList(event) {
 			}
 			else{
 				if(!inventoryMap[val]){
-						toastr.options.closeButton=false;
-                toastr.options.timeOut=3000;
+						
 					toastr.error("The given Barcode does not exists" );
-                toastr.options.closeButton=true;
-                toastr.options.timeOut=0;		
+               		
 
 				}
-				toastr.options.closeButton=false;
-                toastr.options.timeOut=3000;
+				
 				toastr.error("The product inventory is: " + inventoryMap[val] + " order cannot be placed more than that");
-                toastr.options.closeButton=true;
-                toastr.options.timeOut=0;		
+                	
 				
 				}
 		}
@@ -234,7 +226,6 @@ function getOrderItems(id,myList) {
 		 }
 	});
 }
-
 
 //UI DISPLAY METHODS
 
@@ -430,11 +421,9 @@ function displayOrderItem(data){
         				{
 						$('#addNewItem'+ data.orderId +'').attr('disabled',true) ;
 
-				toastr.options.closeButton=false;
-                toastr.options.timeOut=3000;
+				
         		toastr.warning("Invoice is generated");
-                toastr.options.closeButton=true;
-                toastr.options.timeOut=0;
+                
         				}
         				else
         				{
@@ -470,11 +459,9 @@ function displayAddOrderItemModal(order_id) {
     		 console.log(response);
     				if(response.isInvoiceGenerated)
     				{
-    				toastr.options.closeButton=false;
-                toastr.options.timeOut=3000;
+    				
     		    toastr.warning("Invoice already generated");
-                toastr.options.closeButton=true;
-                toastr.options.timeOut=0;
+                
     				}
     				else
     				{
@@ -501,7 +488,6 @@ function createOrderItems(data,id,myList) {
 		var e = myList[i];
 		if(e.isInvoiceGenerated)
 		{
-			console.log($('#addNewItem'+ e.id +'')) ;
 			$('#addNewItem'+e.id+'').attr('disabled',true);
 		}
 	}
@@ -512,9 +498,10 @@ function createOrderItems(data,id,myList) {
 	thHtml += '<th scope="col">Actions</th>';
 	thHtml += '</tr>';
 	table.append(thHtml);
+	
 	for(var i in data){
 		var e = data[i];
-		var buttonHtml = '<button class="btn btn-sm btn-primary btnSend" id="editOrder'+e.orderId+'" onclick="displayEditOrderItem(' + e.id + ')">Edit</button>';
+		var buttonHtml = '<button class="btn btn-sm btn-primary btnSend" id="editOrder'+e.id+'" onclick="displayEditOrderItem(' + e.id + ')">Edit</button>';
 		var row = '<tr>'
 		+ '<td>' + e.barcode + '</td>'
 		+ '<td>'  + e.quantity + '</td>'
@@ -522,9 +509,20 @@ function createOrderItems(data,id,myList) {
 		+ '<td>' + buttonHtml + '</td>'
 		+ '</tr>';
 		table.append(row);
-			
+		
 		
 	}
+	
+	let currOrder = myList.find((e)=>e.id==id);
+	
+	if(currOrder.isInvoiceGenerated){
+		for(var i in data){
+			$('#editOrder'+data[i].id+'').attr('disabled',true);
+		
+		}
+	}
+	
+	
 	
 }
 
@@ -540,75 +538,59 @@ function validateOrderItem(json) {
 	json = JSON.parse(json);
 	
 	if(isBlank(json.barcode)) {
-	toastr.options.closeButton=false;
-                toastr.options.timeOut=3000;
+	
 		toastr.error("Barcode must not be empty");
-                toastr.options.closeButton=true;
-                toastr.options.timeOut=0;
+                
 
 		return false;
 	}
 	if(isfull(json.barcode)){
-	toastr.options.closeButton=false;
-                toastr.options.timeOut=3000;
+	
 	toastr.error("Maximum String length of Barcode exceeded")
-                toastr.options.closeButton=true;
-                toastr.options.timeOut=0;
+                
            
 	
 		return false;
 	}
 	
 	if(isBlank(json.quantity)) {
-	toastr.options.closeButton=false;
-                toastr.options.timeOut=3000;
+	
             		toastr.error("Quantity field must not be empty");
-                toastr.options.closeButton=true;
-                toastr.options.timeOut=0;
+                
             		return false;
             	}
             	else if(isNaN(parseInt(json.quantity)) || !isInt(json.quantity)){
-            	toastr.options.closeButton=false;
-                toastr.options.timeOut=3000;
+            	
             	    toastr.error("Quantity field: " + json.quantity+ " must be an integer value");
-                toastr.options.closeButton=true;
-                toastr.options.timeOut=0;
+               
                             		return false;
             	}
 
 	if(parseInt(json.quantity)<=0) {
-	toastr.options.closeButton=false;
-                toastr.options.timeOut=3000;
+	
 		toastr.error("Quantity must be positive");
-                toastr.options.closeButton=true;
-                toastr.options.timeOut=0;
+               
 
 		return false;
 	}
 
 	if(isBlank(json.sp) ) {
-	        toastr.options.closeButton=false;
-                toastr.options.timeOut=3000;
+	      
     		toastr.error("Selling price must not be empty");
-                toastr.options.closeButton=true;
-                toastr.options.timeOut=0;
+               
     		return false;
     	}
     	else if(isNaN((json.sp))){
-    	toastr.options.closeButton=false;
-                toastr.options.timeOut=3000;
+    	
     	    toastr.error("Selling price: "+json.sp+" must be a double value");
-                toastr.options.closeButton=true;
-                toastr.options.timeOut=0;
+               
                 		return false;
     	}
 
     if(parseFloat(json.sp)<=0) {
-    toastr.options.closeButton=false;
-                toastr.options.timeOut=3000;
+    
     		toastr.error("Selling price must be positive");
-                toastr.options.closeButton=true;
-                toastr.options.timeOut=0;
+                
     		return false;
     	}
 	return true;

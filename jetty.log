@@ -1831,3 +1831,11 @@ Caused by: java.lang.IllegalArgumentException: Unrecognized legacy `hibernate.hb
 2022-07-01 13:49:23 WARN  FOUserAgent:94 - Font "Symbol,normal,700" not found. Substituting with "Symbol,normal,400".
 2022-07-01 13:49:23 WARN  FOUserAgent:94 - Font "ZapfDingbats,normal,700" not found. Substituting with "ZapfDingbats,normal,400".
 2022-07-01 13:49:23 INFO  FOUserAgent:83 - Rendered page #1.
+2022-07-04 12:33:51 INFO  FOUserAgent:83 - An fo:table  (No context info available) is wider than the available room in inline-progression-dimension. Adjusting end-indent based on overconstrained geometry rules (XSL 1.1, ch. 5.3.4)
+2022-07-04 12:33:51 WARN  FOUserAgent:94 - Font "Symbol,normal,700" not found. Substituting with "Symbol,normal,400".
+2022-07-04 12:33:51 WARN  FOUserAgent:94 - Font "ZapfDingbats,normal,700" not found. Substituting with "ZapfDingbats,normal,400".
+2022-07-04 12:33:51 INFO  FOUserAgent:83 - Rendered page #1.
+2022-07-04 12:34:29 INFO  FOUserAgent:83 - An fo:table  (No context info available) is wider than the available room in inline-progression-dimension. Adjusting end-indent based on overconstrained geometry rules (XSL 1.1, ch. 5.3.4)
+2022-07-04 12:34:29 WARN  FOUserAgent:94 - Font "Symbol,normal,700" not found. Substituting with "Symbol,normal,400".
+2022-07-04 12:34:29 WARN  FOUserAgent:94 - Font "ZapfDingbats,normal,700" not found. Substituting with "ZapfDingbats,normal,400".
+2022-07-04 12:34:29 INFO  FOUserAgent:83 - Rendered page #1.
