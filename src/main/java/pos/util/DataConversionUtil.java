@@ -74,6 +74,7 @@ public class DataConversionUtil {
 		productData.setMrp(productPojo.getMrp());
 		productData.setId(productPojo.getId());
 		productData.setBrand(brandPojo.getBrand());
+		productData.setBrandCategory(productPojo.getBrandCategory());
 		productData.setCategory(brandPojo.getCategory());
 		return productData;
 	}

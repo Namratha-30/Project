@@ -42,12 +42,12 @@
     </sales_item>
     <sales_item>
         <category>drink</category>
-        <quantity>15</quantity>
-        <revenue>2305.0</revenue>
+        <quantity>17</quantity>
+        <revenue>2349.6</revenue>
     </sales_item>
     <sales_item>
         <category>chocolate</category>
-        <quantity>2</quantity>
-        <revenue>216.0</revenue>
+        <quantity>7</quantity>
+        <revenue>327.5</revenue>
     </sales_item>
 </sales_items>
